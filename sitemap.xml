@@ -1,0 +1,13 @@
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>https://ares0x.me/</loc><lastmod>2023-02-05T11:58:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ares0x.me/categories/</loc><lastmod>2023-02-05T11:58:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ares0x.me/posts/</loc><lastmod>2023-02-05T11:58:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ares0x.me/posts/something/</loc><lastmod>2023-02-05T11:58:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ares0x.me/categories/test/</loc><lastmod>2023-02-05T11:58:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ares0x.me/posts/first_post/</loc><lastmod>2023-02-05T09:13:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ares0x.me/authors/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/series/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
