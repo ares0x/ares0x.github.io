@@ -1,12 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>ares0x&#39;s blog</title>
-        <link>https://ares0x.me/</link>
-        <description>ares0x&#39;s blog</description>
+        <title>All Posts - ares0x&#39;s blog</title>
+        <link>https://ares0x.me/posts/</link>
+        <description>All Posts | ares0x&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>jialijun1024@gmail.com (ares0x)</managingEditor>
-            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</lastBuildDate>
-            <atom:link href="https://ares0x.me/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</lastBuildDate><atom:link href="https://ares0x.me/posts/" rel="self" type="application/rss+xml" /><item>
     <title>Insertion Sort</title>
     <link>https://ares0x.me/posts/insertion-sort/</link>
     <pubDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</pubDate><author>

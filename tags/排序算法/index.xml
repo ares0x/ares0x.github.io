@@ -1,12 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>ares0x&#39;s blog</title>
-        <link>https://ares0x.me/</link>
-        <description>ares0x&#39;s blog</description>
+        <title>排序算法 - Tag - ares0x&#39;s blog</title>
+        <link>https://ares0x.me/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</link>
+        <description>排序算法 - Tag - ares0x&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>jialijun1024@gmail.com (ares0x)</managingEditor>
-            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</lastBuildDate>
-            <atom:link href="https://ares0x.me/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</lastBuildDate><atom:link href="https://ares0x.me/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>Insertion Sort</title>
     <link>https://ares0x.me/posts/insertion-sort/</link>
     <pubDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</pubDate><author>
