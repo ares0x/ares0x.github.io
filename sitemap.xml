@@ -1,1 +1,10 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://ares0x.me/readme/</loc><priority>0</priority></url><url><loc>https://ares0x.me/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url><loc>https://ares0x.me/authors/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url><loc>https://ares0x.me/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url><loc>https://ares0x.me/series/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url><loc>https://ares0x.me/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    ><url>
+            <loc>https://ares0x.me/readme/</loc><priority>0</priority></url><url>
+            <loc>https://ares0x.me/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/authors/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/categories/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/series/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/tags/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
