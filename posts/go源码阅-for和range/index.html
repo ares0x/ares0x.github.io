@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Go源码阅 For和range - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="Go源码阅 For和range" />
+<meta property="og:description" content="for 循环两种形式：三段式循环和 range
+1 2 3 4 5 6 7 8 9 10 11 func do() { slice := []int{1,2,3} // 三段式 for i := 0; i &lt; len(slice); i&#43;&#43; { // do something } // range for idx, val := range slice { // do something } } range 可以帮助我们快速遍历数组，切片，哈希表以及 Channel 等集合类型。 for 循环可以让代码中的数据和逻辑分离，同一份代码能够多次复用相同的处理逻辑。
+在汇编语言中，无论是近点的 for 循环还是 for-range 循环都会使用 JMP 等命令跳回循环体的开始位置复用代码。（for-range最终会被转换成普通的for循环格式）
+现象 没有循环永动机 1 2 3 4 5 6 7 func main() { arr := []int{1,2,3} for _, v := range arr { arr = arr." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-09T20:25:43+08:00" />
+<meta property="article:modified_time" content="2023-02-09T20:25:43+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go源码阅 For和range"/>
+<meta name="twitter:description" content="for 循环两种形式：三段式循环和 range
+1 2 3 4 5 6 7 8 9 10 11 func do() { slice := []int{1,2,3} // 三段式 for i := 0; i &lt; len(slice); i&#43;&#43; { // do something } // range for idx, val := range slice { // do something } } range 可以帮助我们快速遍历数组，切片，哈希表以及 Channel 等集合类型。 for 循环可以让代码中的数据和逻辑分离，同一份代码能够多次复用相同的处理逻辑。
+在汇编语言中，无论是近点的 for 循环还是 for-range 循环都会使用 JMP 等命令跳回循环体的开始位置复用代码。（for-range最终会被转换成普通的for循环格式）
+现象 没有循环永动机 1 2 3 4 5 6 7 func main() { arr := []int{1,2,3} for _, v := range arr { arr = arr."/>
+<meta name="application-name" content="ares0x&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange/" /><link rel="prev" href="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%8F%8D%E5%B0%84/" /><link rel="next" href="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-select/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go源码阅 For和range",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ares0x.me\/posts\/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange\/"
+        },"genre": "posts","wordcount":  421 ,
+        "url": "https:\/\/ares0x.me\/posts\/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange\/","datePublished": "2023-02-09T20:25:43+08:00","dateModified": "2023-02-09T20:25:43+08:00","publisher": {
+            "@type": "Organization",
+            "name": "ares0x"},"author": {
+                "@type": "Person",
+                "name": "ares0x"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于我 </a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="Switch Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="black">Black</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于我</a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" class="menu-item theme-select" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="Switch Theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="black">Black</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "false")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go源码阅 For和range</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-09">2023-02-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-02-09">2023-02-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;421 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#现象">现象</a>
+      <ul>
+        <li><a href="#没有循环永动机">没有循环永动机</a></li>
+        <li><a href="#指针">指针</a></li>
+        <li><a href="#遍历清空数组">遍历清空数组</a></li>
+        <li><a href="#随机遍历">随机遍历</a></li>
+        <li><a href="#经典循环">经典循环</a></li>
+        <li><a href="#范围循环">范围循环</a>
+          <ul>
+            <li><a href="#数组和切片">数组和切片</a></li>
+            <li><a href="#哈希表">哈希表</a></li>
+            <li><a href="#字符串">字符串</a></li>
+            <li><a href="#通道">通道</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>for 循环两种形式：三段式循环和 range</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">do</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slice</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 三段式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// range
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="nx">idx</span><span class="p">,</span> <span class="nx">val</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">slice</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>range 可以帮助我们快速遍历数组，切片，哈希表以及 Channel 等集合类型。
+for 循环可以让代码中的数据和逻辑分离，同一份代码能够多次复用相同的处理逻辑。</p>
+<p>在汇编语言中，无论是近点的 for 循环还是 for-range 循环都会使用 JMP 等命令跳回循环体的开始位置复用代码。（for-range最终会被转换成普通的for循环格式）</p>
+<h2 id="现象" class="headerLink">
+    <a href="#%e7%8e%b0%e8%b1%a1" class="header-mark"></a>现象</h2><h3 id="没有循环永动机" class="headerLink">
+    <a href="#%e6%b2%a1%e6%9c%89%e5%be%aa%e7%8e%af%e6%b0%b8%e5%8a%a8%e6%9c%ba" class="header-mark"></a>没有循环永动机</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">arr</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">arr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">arr</span> <span class="p">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nb">append</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span><span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="c1">// 会输出 1 2 3 1 2 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="指针" class="headerLink">
+    <a href="#%e6%8c%87%e9%92%88" class="header-mark"></a>指针</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">arr</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">newArr</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="kt">int</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">arr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">newArr</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">newArr</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">v</span><span class="p">)</span> <span class="c1">// 用 &amp;arr[i] 替代 &amp;v
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">newArr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">v</span><span class="p">)</span> <span class="c1">// 会输出 3 3 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="遍历清空数组" class="headerLink">
+    <a href="#%e9%81%8d%e5%8e%86%e6%b8%85%e7%a9%ba%e6%95%b0%e7%bb%84" class="header-mark"></a>遍历清空数组</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">arr</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">arr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="mi">0</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>遍历清空耗费性能，最快的方式是直接清空这片内存中的内容。 上述方法最后回调用 runtime.memclrNoHeapPointers 清空切片中的数据。</p>
+<h3 id="随机遍历" class="headerLink">
+    <a href="#%e9%9a%8f%e6%9c%ba%e9%81%8d%e5%8e%86" class="header-mark"></a>随机遍历</h3><p>Go 在使用 range 遍历哈希表示，每次输出的内容顺序不一定完全一致。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hash</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;1&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;2&#34;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;3&#34;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">hash</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">println</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Go 在运行时为哈希表的遍历引入了不确定性。</p>
+<h3 id="经典循环" class="headerLink">
+    <a href="#%e7%bb%8f%e5%85%b8%e5%be%aa%e7%8e%af" class="header-mark"></a>经典循环</h3><p>经典循环是类似 for i := 0; i &lt; 10; i++ 的格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">Ninit</span><span class="p">;</span> <span class="nx">Left</span><span class="p">;</span> <span class="nx">Right</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">NBody</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>经典循环在 Go 编译器看来是一个 OFOR 类型的节点，节点由以下四个部分组成：</p>
+<ul>
+<li>
+<ol>
+<li>初始化循环的 Ninit ;(for i := 0)</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>循环的继续条件 Left ; (i &lt; 5)</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>循环体结束时执行的 Right ;(i++)</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>循环体 NBody；</li>
+</ol>
+</li>
+</ul>
+<h3 id="范围循环" class="headerLink">
+    <a href="#%e8%8c%83%e5%9b%b4%e5%be%aa%e7%8e%af" class="header-mark"></a>范围循环</h3><p>范围循环是 for-range 格式。编译器会在编译期间将所有的 for-range 循环变成经典循环。即，将 ORANGE 类型节点转换为 OFOR 节点（gc.walkrange）</p>
+<h4 id="数组和切片" class="headerLink">
+    <a href="#%e6%95%b0%e7%bb%84%e5%92%8c%e5%88%87%e7%89%87" class="header-mark"></a>数组和切片</h4><p>range 的三种格式：</p>
+<ul>
+<li>for range arr : 只遍历数组和切片，不关心索引和数据</li>
+<li>for i := range arr : 遍历数组和切片，只关心索引的情况</li>
+<li>for i, v := range arr : 遍历数据和切片，关心索引和数据</li>
+</ul>
+<p>对于所有的 range 循环，Go 都会在编译期间将原切片或者数组赋值给一个新变量 ha，在赋值过程中发生了拷贝，在编译期间预先通过 len 获取了原切片或者数组的长度，所以在循环中追加新的元素不会改变循环执行的次数。</p>
+<p>同时需要遍历索引和元素的 range，Go 会额外创建一个新的 v2 变量用于存储切片中的元素，循环中使用 v2 会在每一次迭代被重新赋值（覆盖）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ha := a
+</span></span><span class="line"><span class="cl">hv1 := 0
+</span></span><span class="line"><span class="cl">hn := len(ha)
+</span></span><span class="line"><span class="cl">v1 := hv1
+</span></span><span class="line"><span class="cl">v2 := nil
+</span></span><span class="line"><span class="cl">for ; hv1 &lt; hn; hv1++ {
+</span></span><span class="line"><span class="cl">    tmp := ha[hv1]
+</span></span><span class="line"><span class="cl">    v1, v2 = hv1, tmp
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">arr</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">arr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;index:%d,  addr:%p\n&#34;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// index:0,  addr:0x140000200d0
+</span></span></span><span class="line"><span class="cl"><span class="c1">// index:1,  addr:0x140000200d0
+</span></span></span><span class="line"><span class="cl"><span class="c1">// index:2,  addr:0x140000200d0
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在循环中获取返回变量的地址都完全相同。所以，如果想要访问数组中元素所在的地址，不应该直接获取range 返回的变量地址 &amp;v2，应该获取&amp;a[idx]</p>
+<h4 id="哈希表" class="headerLink">
+    <a href="#%e5%93%88%e5%b8%8c%e8%a1%a8" class="header-mark"></a>哈希表</h4><p>Go 在设计哈希表的遍历时不想让使用者依赖固定的遍历顺序，引入了随机数（faskrangd()）来保证遍历的随机性。
+遍历哈希时会使用 runtime.mapiternext</p>
+<ul>
+<li>在待遍历的桶为空时，选择需要遍历的新桶</li>
+<li>在不存在待遍历的桶时，返回 (nil,nil) 键值对并终止遍历</li>
+</ul>
+<p>哈希的遍历顺序：</p>
+<ul>
+<li>首先选出一个正常桶开始遍历</li>
+<li>随后遍历溢出桶</li>
+<li>最后依次按照索引顺序比你哈希表中的其他桶，直到所有的桶都被遍历完成</li>
+</ul>
+<h4 id="字符串" class="headerLink">
+    <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2" class="header-mark"></a>字符串</h4><p>字符串遍历与数组，切片和哈希表类似，在遍历时会获取字符串索引对应的字节并将字节转换成 rune。在遍历字符串时拿到的值都是 rune 类型。</p>
+<h4 id="通道" class="headerLink">
+    <a href="#%e9%80%9a%e9%81%93" class="header-mark"></a>通道</h4><p>for v := range ch {}
+循环会使用 &lt;- ch 从管道中取出等待处理的值，该操作会调用 runtime.chanrecv2 并阻塞当前协程。runttime.chanrecv2 返回时会根据布尔值 hb 判断当前值是否存在</p>
+<ul>
+<li>如果不存在当前值，意味着 channel 已经被关闭</li>
+<li>如果存在当前值，会赋值，重新陷入阻塞等待新数据</li>
+</ul>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-02-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange/" data-title="Go源码阅 For和range" data-via="ares0x00"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Linkedin" data-sharer="linkedin" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" title="Share on Reddit" data-sharer="reddit" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange/"><i class="fab fa-reddit fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-for%E5%92%8Crange/" data-title="Go源码阅 For和range"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%8F%8D%E5%B0%84/" class="prev" rel="prev" title="Go源码阅 反射"><i class="fas fa-angle-left fa-fw"></i>Go源码阅 反射</a>
+            <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-select/" class="next" rel="next" title="Go源码阅 Select">Go源码阅 Select<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.110.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"CKGU6AW9EO","algoliaIndex":"blog-index","algoliaSearchKey":"70b23c01cd5e46fc98c19812b0cb04ce","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"sharerjs":true,"table":{"sort":true}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '2781045083', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=2781045083" async></script></div>
+</body>
+
+</html>

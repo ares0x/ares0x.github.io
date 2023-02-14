@@ -123,21 +123,60 @@
         alt="https://www.gravatar.com/avatar/2898d0a9a7988546beac7d3d9a74ad3b?s=240&amp;d=mp"
         title="https://www.gravatar.com/avatar/2898d0a9a7988546beac7d3d9a74ad3b?s=240&amp;d=mp" height="100" width="100"></a></div><h2 class="home-subtitle">Ares 写东西的地方</h2><div class="links"><a href="https://github.com/ares0x" title="GitHub" target="_blank" rel="noopener noreferrer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://twitter.com/ares0x00" title="Twitter" target="_blank" rel="noopener noreferrer me"><i class="fab fa-twitter fa-fw"></i></a><a href="mailto:jialijun1024@gmail.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Go源码阅读 - 环境配置</a>
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">Go源码阅 栈内存管理</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-06">2023-02-06</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E6%BA%90%E7%A0%81/"><i class="far fa-folder fa-fw"></i>源码</a></span></div><div class="content">该系列是我在搭配 Go 语言设计与实现 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。 环境说明 机器配置：Apple M1 Pro Go 版本： go1.16.5 编辑器：Goland, VIM, VS Code GOPATH：/Users/ares/workspace/go 建立目录在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示 下载go源码在 https://go.dev/dl/ 中下载与本地 go version 版本一致的源码，注意（Mac M系列芯片的要选择 Arch 为ARM64 的）
-1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) .</div><div class="post-footer">
-        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Read more...</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a></div></div>
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-09">2023-02-09</time></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">Read more...</a></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/insertion-sort/">Insertion Sort</a>
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">Go源码阅 垃圾收集器</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-06">2023-02-06</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div><div class="content"> 算法介绍 算法实现 1 2 3 4 5 6 7 8 9 10 11 12 13 func InsertionSort(arr []int) []int { for i := 1; i &lt; len(arr); i++ { j := i for j &gt; 0 { if arr[j-1] &gt; arr[j] { arr[j-1], arr[j] = arr[j], arr[j-1] } j = j - 1 } } return arr } </div><div class="post-footer">
-        <a href="/posts/insertion-sort/">Read more...</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>,&nbsp;<a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></div></div>
-</article></div></div>
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-09">2023-02-09</time></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">Read more...</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8/">Go源码阅 内存分配器</a>
+    </h1><div class="post-meta">
+        <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-09">2023-02-09</time></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8/">Read more...</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7/">Go源码阅 系统监控</a>
+    </h1><div class="post-meta">
+        <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-09">2023-02-09</time></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7/">Read more...</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%BD%91%E7%BB%9C%E8%BD%AE%E8%AF%A2%E5%99%A8/">Go源码阅 网络轮询器</a>
+    </h1><div class="post-meta">
+        <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-09">2023-02-09</time></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%BD%91%E7%BB%9C%E8%BD%AE%E8%AF%A2%E5%99%A8/">Read more...</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E8%B0%83%E5%BA%A6%E5%99%A8/">Go源码阅 调度器</a>
+    </h1><div class="post-meta">
+        <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-09">2023-02-09</time></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E8%B0%83%E5%BA%A6%E5%99%A8/">Read more...</a></div>
+</article><ul class="pagination"><li class="page-item active">
+                    <span class="page-link">
+                        <a href="/">1</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/2/">2</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/3/">3</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link" aria-hidden="true">&hellip;</span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
+                    </span>
+                </li></ul></div></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
                     Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.110.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
