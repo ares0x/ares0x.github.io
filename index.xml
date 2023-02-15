@@ -4,82 +4,22 @@
         <link>https://ares0x.me/</link>
         <description>ares0x&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>jialijun1024@gmail.com (ares0x)</managingEditor>
-            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Thu, 09 Feb 2023 20:28:12 &#43;0800</lastBuildDate>
+            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Mon, 06 Feb 2023 22:29:00 &#43;0800</lastBuildDate>
             <atom:link href="https://ares0x.me/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Go源码阅 栈内存管理</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
-    <pubDate>Thu, 09 Feb 2023 20:28:12 &#43;0800</pubDate><author>
+    <title>Go源码阅读 - 环境配置</title>
+    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+    <pubDate>Mon, 06 Feb 2023 22:29:00 &#43;0800</pubDate><author>
         <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E6%A0%88%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</guid>
-    <description><![CDATA[]]></description>
+    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+    <description><![CDATA[该系列是我在搭配 Go 语言设计与实现 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。 环境说明 机器配置：Apple M1 Pro Go 版本： go1.16.5 编辑器：Goland, VIM, VS Code GOPATH：/Users/ares/workspace/go 建立目录在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示 下载go源码在 https://go.dev/dl/ 中下载与本地 go version 版本一致的源码，注意（Mac M系列芯片的要选择 Arch 为ARM64 的）
+1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) .]]></description>
 </item><item>
-    <title>Go源码阅 垃圾收集器</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</link>
-    <pubDate>Thu, 09 Feb 2023 20:28:01 &#43;0800</pubDate><author>
+    <title>Insertion Sort</title>
+    <link>https://ares0x.me/posts/insertion-sort/</link>
+    <pubDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</pubDate><author>
         <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Go源码阅 内存分配器</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8/</link>
-    <pubDate>Thu, 09 Feb 2023 20:27:54 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%99%A8/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Go源码阅 系统监控</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7/</link>
-    <pubDate>Thu, 09 Feb 2023 20:27:41 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Go源码阅 网络轮询器</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%BD%91%E7%BB%9C%E8%BD%AE%E8%AF%A2%E5%99%A8/</link>
-    <pubDate>Thu, 09 Feb 2023 20:27:32 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E7%BD%91%E7%BB%9C%E8%BD%AE%E8%AF%A2%E5%99%A8/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Go源码阅 调度器</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E8%B0%83%E5%BA%A6%E5%99%A8/</link>
-    <pubDate>Thu, 09 Feb 2023 20:27:09 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E8%B0%83%E5%BA%A6%E5%99%A8/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Go源码阅 Channel</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-channel/</link>
-    <pubDate>Thu, 09 Feb 2023 20:27:02 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-channel/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Go源码阅 定时器</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
-    <pubDate>Thu, 09 Feb 2023 20:26:57 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%AE%9A%E6%97%B6%E5%99%A8/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Go源码阅 同步原语和锁</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%E5%92%8C%E9%94%81/</link>
-    <pubDate>Thu, 09 Feb 2023 20:26:49 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%E5%92%8C%E9%94%81/</guid>
-    <description><![CDATA[锁是一种并发编程中的同步原语，它能保证多个 goroutine 在访问统一内存时不会出现竞争条件等问题。
-常见的同步原语： sync.Mutex sync.RWMutex sync.WaitGroup sync.Once sync.Cond
-Mutex 1 2 3 4 5 // 互斥锁结构 type Mutex struct { state int32 // 锁的状态 sema uint32 // 用于控制锁状态的信号量 } 默认情况下，互斥锁的所有状态为都是 0，int32 中不同位表示不同的状态：
-mutexLocked - 表示互斥锁的锁定状态 mutexWoken - 表示从正常状态被唤醒 mutexStarving - 表示当前互斥锁进入饥饿状态 waitersCount - 表示当前互斥锁上等待的 goroutine 个数 正常模式和饥饿模式 Mutex can be in 2 modes of operations: normal and starvation. 互斥锁有两种模式：正常模式和饥饿模式 正常模式下，锁的等待者按照先进先出 FIFO的顺序获取锁。但是刚被唤起的 goroutine 与新创建的 goroutine 竞争时，大概率会获取不到锁。为了减少这种情况的出现，一旦 goroutine 超过 1ms 没有获取到锁，它就会从当前互斥锁切换为饥饿模式，防止部分 goroutine 被饿死]]></description>
-</item><item>
-    <title>Go源码阅 Context</title>
-    <link>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-context/</link>
-    <pubDate>Thu, 09 Feb 2023 20:26:25 &#43;0800</pubDate><author>
-        <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85-context/</guid>
-    <description><![CDATA[context.Context 在 go 中被用于设置截至时间，同步信号，传递请求相关值的结构体。 context.Context 是一个 interface，定义了 4 个方法
-1 2 3 4 5 6 type Context interface { Deadline() (deadline time.Time, ok bool) //返回 context.Context 被取消的时间，即完成工作的截止时间 Done() &lt;-chan struct{} // 返回一个 channel，该 channel 会在当前工作完成或者上下文被取消后关闭 Err() error // 返回 context.Context 结束的原因，它只会在 Done 方法对应的 Channel 关闭时返回非空的值。如果 context.Context 被取消，返回 Canceled 错误；context.Context 超时，返回 DeadlineExceed 错误 Value(key interface{}) interface{} // 从 context.Context 中获取键对应的值。对于同一个上下文来说，多次调用 Value 并传入相同 Key 会返回相同的结果。 } context.Context 最大的作用是：在 goroutine 构成的树形结构中对信号进行同步，以减少计算资源的浪费。
-多个 goroutine 同时订阅 ctx.]]></description>
+    </author><guid>https://ares0x.me/posts/insertion-sort/</guid>
+    <description><![CDATA[ 算法介绍 算法实现 1 2 3 4 5 6 7 8 9 10 11 12 13 func InsertionSort(arr []int) []int { for i := 1; i &lt; len(arr); i++ { j := i for j &gt; 0 { if arr[j-1] &gt; arr[j] { arr[j-1], arr[j] = arr[j], arr[j-1] } j = j - 1 } } return arr } ]]></description>
 </item></channel>
 </rss>
