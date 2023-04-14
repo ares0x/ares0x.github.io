@@ -5,4 +5,4 @@ gin 框架是一个使用Go语言编写的 web 框架，拥有很高的性能和
 我会在后续一系列文章介绍 gin 框架的使用和原理。
 
 gin 文章目录：
-1. [gin 路由]()
+1. [gin 路由](https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/)

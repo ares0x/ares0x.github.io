@@ -5,15 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>Go源码阅读 - 环境配置 - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="Go源码阅读 - 环境配置" />
+    <title>Go 源码阅读 - 环境配置 - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="Go 源码阅读 - 环境配置" />
 <meta property="og:description" content="该系列是我在搭配 Go 语言设计与实现 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。 环境说明 机器配置：Apple M1 Pro Go 版本： go1.16.5 编辑器：Goland, VIM, VS Code GOPATH：/Users/ares/workspace/go 建立目录在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示 下载go源码在 https://go.dev/dl/ 中下载与本地 go version 版本一致的源码，注意（Mac M系列芯片的要选择 Arch 为ARM64 的）
 1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) ." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-06T22:29:00+08:00" />
 <meta property="article:modified_time" content="2023-02-06T22:29:00+08:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Go源码阅读 - 环境配置"/>
+<meta name="twitter:title" content="Go 源码阅读 - 环境配置"/>
 <meta name="twitter:description" content="该系列是我在搭配 Go 语言设计与实现 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。 环境说明 机器配置：Apple M1 Pro Go 版本： go1.16.5 编辑器：Goland, VIM, VS Code GOPATH：/Users/ares/workspace/go 建立目录在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示 下载go源码在 https://go.dev/dl/ 中下载与本地 go version 版本一致的源码，注意（Mac M系列芯片的要选择 Arch 为ARM64 的）
 1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) ."/>
 <meta name="application-name" content="ares0x&#39;s blog">
@@ -21,19 +21,19 @@
 
 <meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="prev" href="https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="prev" href="https://ares0x.me/posts/docker-%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Go源码阅读 - 环境配置",
+        "headline": "Go 源码阅读 - 环境配置",
         "inLanguage": "zh-cn",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/ares0x.me\/posts\/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/"
+            "@id": "https:\/\/ares0x.me\/posts\/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/"
         },"genre": "posts","keywords": "Go, 源码阅读","wordcount":  123 ,
-        "url": "https:\/\/ares0x.me\/posts\/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/","datePublished": "2023-02-06T22:29:00+08:00","dateModified": "2023-02-06T22:29:00+08:00","publisher": {
+        "url": "https:\/\/ares0x.me\/posts\/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE\/","datePublished": "2023-02-06T22:29:00+08:00","dateModified": "2023-02-06T22:29:00+08:00","publisher": {
             "@type": "Organization",
             "name": "ares0x"},"author": {
                 "@type": "Person",
@@ -124,7 +124,7 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 <main class="main">
-            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "false")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go源码阅读 - 环境配置</h1><div class="post-meta">
+            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "false")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go 源码阅读 - 环境配置</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
                 </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E6%BA%90%E7%A0%81/"><i class="far fa-folder fa-fw"></i>源码</a></span></div>
@@ -263,10 +263,10 @@
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
-            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
                     </span></div>
             <div class="post-info-share">
-                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="Go源码阅读 - 环境配置" data-via="ares0x00" data-hashtags="Go,源码阅读"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Linkedin" data-sharer="linkedin" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" title="Share on Reddit" data-sharer="reddit" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><i class="fab fa-reddit fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="Go源码阅读 - 环境配置"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="Go 源码阅读 - 环境配置" data-via="ares0x00" data-hashtags="Go,源码阅读"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Linkedin" data-sharer="linkedin" data-url="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" title="Share on Reddit" data-sharer="reddit" data-url="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"><i class="fab fa-reddit fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" data-title="Go 源码阅读 - 环境配置"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -278,7 +278,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" class="prev" rel="prev" title="Docker简易操作"><i class="fas fa-angle-left fa-fw"></i>Docker简易操作</a></div>
+    <div class="post-nav"><a href="/posts/docker-%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" class="prev" rel="prev" title="Docker简易操作"><i class="fas fa-angle-left fa-fw"></i>Docker简易操作</a></div>
 </div>
 </article></div>
         </main><footer class="footer">
