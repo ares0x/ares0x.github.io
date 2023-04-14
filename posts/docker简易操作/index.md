@@ -265,4 +265,4 @@ release:
 ```
 这样，我们就可以通过 **make build** 来编译指定平台的二进制文件，通过 **make release** 来构建镜像。
 
-
+详细内容请参考：https://github.com/ares0x/practice/tree/main/depoly/webserver
