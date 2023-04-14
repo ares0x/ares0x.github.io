@@ -13,11 +13,13 @@
     <description><![CDATA[该系列是我在搭配 Go 语言设计与实现 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。 环境说明 机器配置：Apple M1 Pro Go 版本： go1.16.5 编辑器：Goland, VIM, VS Code GOPATH：/Users/ares/workspace/go 建立目录在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示 下载go源码在 https://go.dev/dl/ 中下载与本地 go version 版本一致的源码，注意（Mac M系列芯片的要选择 Arch 为ARM64 的）
 1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) .]]></description>
 </item><item>
-    <title>Insertion Sort</title>
-    <link>https://ares0x.me/posts/insertion-sort/</link>
-    <pubDate>Mon, 06 Feb 2023 11:10:40 &#43;0800</pubDate><author>
+    <title>Mac下安装minikube</title>
+    <link>https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/</link>
+    <pubDate>Fri, 03 Feb 2023 23:00:01 &#43;0800</pubDate><author>
         <name>ares0x</name>
-    </author><guid>https://ares0x.me/posts/insertion-sort/</guid>
-    <description><![CDATA[ 算法介绍 算法实现 1 2 3 4 5 6 7 8 9 10 11 12 13 func InsertionSort(arr []int) []int { for i := 1; i &lt; len(arr); i++ { j := i for j &gt; 0 { if arr[j-1] &gt; arr[j] { arr[j-1], arr[j] = arr[j], arr[j-1] } j = j - 1 } } return arr } ]]></description>
+    </author><guid>https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/</guid>
+    <description><![CDATA[Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。
+为什么要用 Docker 更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）； 更快速的启动时间； 一致的运行环境； 持续交付和部署； 更轻松地迁移，维护和部署 Docker 常用操作 容器操作 启动 1 2 3 4 5 docker run # -it 交互 # -d 后台运行,如果不加 -d，从容器退出后该容器会停止运行 # -p 端口映射 # -v 硬盘挂载 eg:
+1 docker run centos -d # 启动一个 centos 容器，并进入容器内部 停止容器 1 docker stop xxx 启动已停止容器 1 docker start xxx 查看容器进程 1 2 docker ps # -a 查看所有容器（包括已停止的容器） 举例]]></description>
 </item></channel>
 </rss>

@@ -1,0 +1,33 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>gin - Category - ares0x&#39;s blog</title>
+        <link>https://ares0x.me/categories/gin/</link>
+        <description>gin - Category - ares0x&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>jialijun1024@gmail.com (ares0x)</managingEditor>
+            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Fri, 03 Feb 2023 23:00:01 &#43;0800</lastBuildDate><atom:link href="https://ares0x.me/categories/gin/" rel="self" type="application/rss+xml" /><item>
+    <title>gin 框架</title>
+    <link>https://ares0x.me/drafts/gin-%E8%B7%AF%E7%94%B1/</link>
+    <pubDate>Fri, 03 Feb 2023 23:00:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/drafts/gin-%E8%B7%AF%E7%94%B1/</guid>
+    <description><![CDATA[简介路由是指当客户端请求达到后端服务器后，根据请求的 HTTP 请求方法和 URL，找到对应的处理函数进行处理的过程。路由由 HTTP 请求方法，URL 和请求处理器组成。HTTP 请求方法指 HTTP 协议中定义的请求类型，常见的包括 GET、POST、PUT、DELETE 等。URL 指请求的资源在服务器上的路径，通常是由一个或多个单词或数字组成，在一定规则约束下可带上特定字符，例如斜杠、短横线等。请求处理器是指针对某一请求的响应处理函数。
+基本使用 基本路由 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import &#34;github.com/gin-gonic/gin&#34; func main() { g := gin.Default() g.Handle(&#34;GET&#34;, &#34;/hello&#34;, func(c *gin.Context) { c.JSON(200, gin.H{ &#34;message&#34;: &#34;Hello World!&#34;, }) }) g.Run(&#34;:8080&#34;) } 使用 g.Handle() 方法可以定义针对特定请求方法的路由。Handle() 方法的第一个参数是 HTTP 请求方法，第二个参数是 URL 路径，第三个参数是请求处理器函数。在上面的例子中，我们定义了一个针对 HTTP GET 方法、URL 路径为 /hello 的路由。当用户请求该路径时，路由器会调用”请求处理器函数”返回相应的 JSON 信息。
+除了上述方法外，我们还可以使用GET()、POST()、DELETE()等快捷方法定义路由。比如：]]></description>
+</item><item>
+    <title>gin 框架 - 简述</title>
+    <link>https://ares0x.me/drafts/docker%E4%B8%8B%E9%83%A8%E7%BD%B2go%E9%A1%B9%E7%9B%AE/</link>
+    <pubDate>Thu, 02 Feb 2023 11:31:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/drafts/docker%E4%B8%8B%E9%83%A8%E7%BD%B2go%E9%A1%B9%E7%9B%AE/</guid>
+    <description><![CDATA[Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。
+编写 Dockerfile编写 Dockerfile 是 Docker 部署项目的重要环节。我们需要定义 Dockerfile 来描述如何构建镜像，并在其中配置一些环境变量、安装 Go、复制 Go 代码等。下面是一个示例：
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 # 基于golang镜像创建一个新镜像 FROM golang:latest # 在容器的根目录下创建一个app文件夹 RUN mkdir /app # 将工作路径设置为 /app 文件夹 WORKDIR /app # 将当前目录的所有文件拷贝到 /app 文件夹下 COPY .]]></description>
+</item><item>
+    <title>gin 框架 - 简述</title>
+    <link>https://ares0x.me/drafts/gin-%E6%A1%86%E6%9E%B6/</link>
+    <pubDate>Thu, 02 Feb 2023 11:31:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/drafts/gin-%E6%A1%86%E6%9E%B6/</guid>
+    <description><![CDATA[gin 框架是一个使用Go语言编写的 web 框架，拥有很高的性能和可扩展性，在建立 Restful API 服务的时候非常方便。其中 gin 框架的路由功能非常重要，是实现所有请求分发的核心模块，可以用来定义请求的URL和HTTP方法，接受客户端请求并返回响应。]]></description>
+</item></channel>
+</rss>

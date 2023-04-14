@@ -131,12 +131,14 @@
         <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Read more...</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/insertion-sort/">Insertion Sort</a>
+        <a href="/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/">Mac下安装minikube</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-06">2023-02-06</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div><div class="content"> 算法介绍 算法实现 1 2 3 4 5 6 7 8 9 10 11 12 13 func InsertionSort(arr []int) []int { for i := 1; i &lt; len(arr); i++ { j := i for j &gt; 0 { if arr[j-1] &gt; arr[j] { arr[j-1], arr[j] = arr[j], arr[j-1] } j = j - 1 } } return arr } </div><div class="post-footer">
-        <a href="/posts/insertion-sort/">Read more...</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>,&nbsp;<a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></div></div>
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-03">2023-02-03</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div><div class="content">Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。
+为什么要用 Docker 更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）； 更快速的启动时间； 一致的运行环境； 持续交付和部署； 更轻松地迁移，维护和部署 Docker 常用操作 容器操作 启动 1 2 3 4 5 docker run # -it 交互 # -d 后台运行,如果不加 -d，从容器退出后该容器会停止运行 # -p 端口映射 # -v 硬盘挂载 eg:
+1 docker run centos -d # 启动一个 centos 容器，并进入容器内部 停止容器 1 docker stop xxx 启动已停止容器 1 docker start xxx 查看容器进程 1 2 docker ps # -a 查看所有容器（包括已停止的容器） 举例</div><div class="post-footer">
+        <a href="/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/">Read more...</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/go/">Go</a></div></div>
 </article></div></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">

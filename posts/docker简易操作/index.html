@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Mac下安装minikube - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="Mac下安装minikube" />
+<meta property="og:description" content="Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。
+为什么要用 Docker 更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）； 更快速的启动时间； 一致的运行环境； 持续交付和部署； 更轻松地迁移，维护和部署 Docker 常用操作 容器操作 启动 1 2 3 4 5 docker run # -it 交互 # -d 后台运行,如果不加 -d，从容器退出后该容器会停止运行 # -p 端口映射 # -v 硬盘挂载 eg:
+1 docker run centos -d # 启动一个 centos 容器，并进入容器内部 停止容器 1 docker stop xxx 启动已停止容器 1 docker start xxx 查看容器进程 1 2 docker ps # -a 查看所有容器（包括已停止的容器） 举例" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-03T23:00:01+08:00" />
+<meta property="article:modified_time" content="2023-02-03T23:00:01+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mac下安装minikube"/>
+<meta name="twitter:description" content="Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。
+为什么要用 Docker 更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）； 更快速的启动时间； 一致的运行环境； 持续交付和部署； 更轻松地迁移，维护和部署 Docker 常用操作 容器操作 启动 1 2 3 4 5 docker run # -it 交互 # -d 后台运行,如果不加 -d，从容器退出后该容器会停止运行 # -p 端口映射 # -v 硬盘挂载 eg:
+1 docker run centos -d # 启动一个 centos 容器，并进入容器内部 停止容器 1 docker stop xxx 启动已停止容器 1 docker start xxx 查看容器进程 1 2 docker ps # -a 查看所有容器（包括已停止的容器） 举例"/>
+<meta name="application-name" content="ares0x&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" /><link rel="next" href="https://ares0x.me/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Mac下安装minikube",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ares0x.me\/posts\/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C\/"
+        },"genre": "posts","keywords": "Docker, Go","wordcount":  704 ,
+        "url": "https:\/\/ares0x.me\/posts\/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C\/","datePublished": "2023-02-03T23:00:01+08:00","dateModified": "2023-02-03T23:00:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": "ares0x"},"author": {
+                "@type": "Person",
+                "name": "ares0x"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于我 </a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="Switch Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="black">Black</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于我</a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" class="menu-item theme-select" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="Switch Theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="black">Black</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "false")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mac下安装minikube</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
+                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-03">2023-02-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-02-03">2023-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;704 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么要用-docker">为什么要用 Docker</a></li>
+    <li><a href="#docker-常用操作">Docker 常用操作</a>
+      <ul>
+        <li><a href="#容器操作">容器操作</a></li>
+        <li><a href="#镜像操作">镜像操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#部署一个-go-项目">部署一个 Go 项目</a>
+      <ul>
+        <li><a href="#编写一个-webserver">编写一个 webserver</a></li>
+        <li><a href="#编写-dockerfile">编写 Dockerfile</a></li>
+        <li><a href="#构建镜像">构建镜像</a></li>
+        <li><a href="#使用-makefile">使用 Makefile</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。</p>
+<h2 id="为什么要用-docker" class="headerLink">
+    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e7%94%a8-docker" class="header-mark"></a>为什么要用 Docker</h2><ol>
+<li>更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）；</li>
+<li>更快速的启动时间；</li>
+<li>一致的运行环境；</li>
+<li>持续交付和部署；</li>
+<li>更轻松地迁移，维护和部署</li>
+</ol>
+<h2 id="docker-常用操作" class="headerLink">
+    <a href="#docker-%e5%b8%b8%e7%94%a8%e6%93%8d%e4%bd%9c" class="header-mark"></a>Docker 常用操作</h2><h3 id="容器操作" class="headerLink">
+    <a href="#%e5%ae%b9%e5%99%a8%e6%93%8d%e4%bd%9c" class="header-mark"></a>容器操作</h3><ul>
+<li>启动</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run
+</span></span><span class="line"><span class="cl"><span class="c1"># -it 交互</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -d 后台运行,如果不加 -d，从容器退出后该容器会停止运行</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -p 端口映射</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -v 硬盘挂载</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>eg:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run centos -d <span class="c1"># 启动一个 centos 容器，并进入容器内部</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>停止容器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker stop xxx 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>启动已停止容器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker start xxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查看容器进程</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker ps
+</span></span><span class="line"><span class="cl"><span class="c1"># -a 查看所有容器（包括已停止的容器）</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>举例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>base<span class="o">)</span> ➜  ~ docker ps <span class="c1">#显示已经启动的容器</span>
+</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE     COMMAND                  CREATED       STATUS      PORTS                    NAMES
+</span></span><span class="line"><span class="cl">1d66faf0f9e9   redis     <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   <span class="m">7</span> weeks ago   Up <span class="m">2</span> days   0.0.0.0:6379-&gt;6379/tcp   single-redis
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>base<span class="o">)</span> ➜  ~ docker ps -a <span class="c1">#显示所有的容器</span>
+</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS                     PORTS                                                                                              NAMES
+</span></span><span class="line"><span class="cl">618ca42d2cf0   centos         <span class="s2">&#34;bash&#34;</span>                   <span class="m">6</span> minutes ago   Exited <span class="o">(</span>0<span class="o">)</span> <span class="m">5</span> minutes ago                                                                                                      youthful_borg
+</span></span><span class="line"><span class="cl">4b8ed64b6bff   rabbitmq       <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   <span class="m">4</span> weeks ago     Exited <span class="o">(</span>255<span class="o">)</span> <span class="m">2</span> weeks ago   4369/tcp, 0.0.0.0:5672-&gt;5672/tcp, 5671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672-&gt;15672/tcp   rabbit
+</span></span><span class="line"><span class="cl">083cf1fdd1e8   423da140c8c0   <span class="s2">&#34;/entrypoint.sh mysq…&#34;</span>   <span class="m">6</span> weeks ago     Exited <span class="o">(</span>255<span class="o">)</span> <span class="m">7</span> days ago    0.0.0.0:3306-&gt;3306/tcp, 33060-33061/tcp                                                            mysql
+</span></span><span class="line"><span class="cl">6841b7c88f95   e082d8ac7e5e   <span class="s2">&#34;/bin/tini -- /usr/l…&#34;</span>   <span class="m">7</span> weeks ago     Exited <span class="o">(</span>255<span class="o">)</span> <span class="m">3</span> weeks ago   0.0.0.0:9200-&gt;9200/tcp, 0.0.0.0:9300-&gt;9300/tcp                                                     elasticsearch
+</span></span><span class="line"><span class="cl">1d66faf0f9e9   redis          <span class="s2">&#34;docker-entrypoint.s…&#34;</span>   <span class="m">7</span> weeks ago     Up <span class="m">2</span> days                  0.0.0.0:6379-&gt;6379/tcp                                                                             single-redis
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查看容器细节</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker inspect xxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>举例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>base<span class="o">)</span> ➜  ~ docker inspect redis
+</span></span><span class="line"><span class="cl"><span class="o">[</span>
+</span></span><span class="line"><span class="cl">    <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Id&#34;</span>: <span class="s2">&#34;sha256:e79ba23ed43baa22054741136bf45bdb041824f41c5e16c0033ea044ca164b82&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;RepoTags&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;redis:latest&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;RepoDigests&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;redis@sha256:6a59f1cbb8d28ac484176d52c473494859a512ddba3ea62a547258cf16c9b3ae&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Parent&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Comment&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2023-02-09T08:14:47.884678524Z&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Container&#34;</span>: <span class="s2">&#34;634f20363cc8a5fd95103f0fc002e10de0884cb5d238359ab676bf3054b4f09c&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ContainerConfig&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Hostname&#34;</span>: <span class="s2">&#34;634f20363cc8&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Domainname&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;User&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;AttachStdin&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;AttachStdout&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;AttachStderr&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;ExposedPorts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;6379/tcp&#34;</span>: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Tty&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;OpenStdin&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;StdinOnce&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Env&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;GOSU_VERSION=1.16&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;REDIS_VERSION=7.0.8&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.0.8.tar.gz&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;REDIS_DOWNLOAD_SHA=06a339e491306783dcf55b97f15a5dbcbdc01ccbde6dc23027c475cab735e914&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Cmd&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/bin/sh&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;-c&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;#(nop) &#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;CMD [\&#34;redis-server\&#34;]&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Image&#34;</span>: <span class="s2">&#34;sha256:781198024e5efdfe9eaf59628844640981f1a9af62109f26e5f33be0417d3172&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Volumes&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/data&#34;</span>: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;WorkingDir&#34;</span>: <span class="s2">&#34;/data&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Entrypoint&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;docker-entrypoint.sh&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;OnBuild&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Labels&#34;</span>: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;DockerVersion&#34;</span>: <span class="s2">&#34;20.10.17&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Author&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Config&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Hostname&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Domainname&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;User&#34;</span>: <span class="s2">&#34;&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;AttachStdin&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;AttachStdout&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;AttachStderr&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;ExposedPorts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;6379/tcp&#34;</span>: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Tty&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;OpenStdin&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;StdinOnce&#34;</span>: false,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Env&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;GOSU_VERSION=1.16&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;REDIS_VERSION=7.0.8&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.0.8.tar.gz&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;REDIS_DOWNLOAD_SHA=06a339e491306783dcf55b97f15a5dbcbdc01ccbde6dc23027c475cab735e914&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Cmd&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;redis-server&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Image&#34;</span>: <span class="s2">&#34;sha256:781198024e5efdfe9eaf59628844640981f1a9af62109f26e5f33be0417d3172&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Volumes&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;/data&#34;</span>: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;WorkingDir&#34;</span>: <span class="s2">&#34;/data&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Entrypoint&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;docker-entrypoint.sh&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;OnBuild&#34;</span>: null,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Labels&#34;</span>: null
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Architecture&#34;</span>: <span class="s2">&#34;arm64&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Variant&#34;</span>: <span class="s2">&#34;v8&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Os&#34;</span>: <span class="s2">&#34;linux&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Size&#34;</span>: 111377329,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;VirtualSize&#34;</span>: 111377329,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;GraphDriver&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Data&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;LowerDir&#34;</span>: <span class="s2">&#34;/var/lib/docker/overlay2/2f4acdea165632b50c6dbaa35179980e705e37bb8d4521c7ebeb3b070c6a3757/diff:/var/lib/docker/overlay2/0ed21db28f0324dc21e53ecbee6b4bb8076d0509c4e8b623df16277975646e86/diff:/var/lib/docker/overlay2/8ea40ec0b53a579f8e22aebfd27dcae323868f247c3ccaf98ea06d6bb4f5feae/diff:/var/lib/docker/overlay2/4df450e39662acc93e109568a402190518c2ceffee550484851cc96af4fb8a69/diff:/var/lib/docker/overlay2/8b1d17876b46a9820d28a0a92955dc5a34c73225b8f4ff2025143aec14325a5a/diff&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;MergedDir&#34;</span>: <span class="s2">&#34;/var/lib/docker/overlay2/5532b0dabadd8a7e4df82e6e8d7f8baa54f844b5c451be99ae8be57ccac77a7e/merged&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;UpperDir&#34;</span>: <span class="s2">&#34;/var/lib/docker/overlay2/5532b0dabadd8a7e4df82e6e8d7f8baa54f844b5c451be99ae8be57ccac77a7e/diff&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;WorkDir&#34;</span>: <span class="s2">&#34;/var/lib/docker/overlay2/5532b0dabadd8a7e4df82e6e8d7f8baa54f844b5c451be99ae8be57ccac77a7e/work&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;overlay2&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;RootFS&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Type&#34;</span>: <span class="s2">&#34;layers&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Layers&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;sha256:a49c6ceb5b3a7ffa366916db7ef211391b4bf093f14091b5d9e21d53297695a3&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;sha256:39a2097041f293c4d3c8c2d31882ab5bf33105610752c92cdc1e2ad27eb23136&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;sha256:557b6c60acd513d3f0e64d3c670700252c53e26f83d07f7a0598bdb27fc11e34&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;sha256:5c44256a056b2bfaf31c3f184dd62cc8fbdcf856e4e8752350820417e4add8b2&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;sha256:35db71540d1a8eb9a52c026a0a1bfe8569bc53e7af92db3ad41cb59850656836&#34;</span>,
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;sha256:73cc6bdd5f25686aee85890890b6db2b40c553aeac7dc2f026208b19550844d2&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">]</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Metadata&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;LastTagTime&#34;</span>: <span class="s2">&#34;0001-01-01T00:00:00Z&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="镜像操作" class="headerLink">
+    <a href="#%e9%95%9c%e5%83%8f%e6%93%8d%e4%bd%9c" class="header-mark"></a>镜像操作</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker images <span class="c1"># 查看镜像</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="部署一个-go-项目" class="headerLink">
+    <a href="#%e9%83%a8%e7%bd%b2%e4%b8%80%e4%b8%aa-go-%e9%a1%b9%e7%9b%ae" class="header-mark"></a>部署一个 Go 项目</h2><h3 id="编写一个-webserver" class="headerLink">
+    <a href="#%e7%bc%96%e5%86%99%e4%b8%80%e4%b8%aa-webserver" class="header-mark"></a>编写一个 webserver</h3><p>为了更好地演示如何使用 Docker 部署 Go 语言项目，我们来实现一个简单的 Web 服务。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">handler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;Hello, Docker!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">http</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="编写-dockerfile" class="headerLink">
+    <a href="#%e7%bc%96%e5%86%99-dockerfile" class="header-mark"></a>编写 Dockerfile</h3><p>编写 Dockerfile 是 Docker 部署项目的重要环节。我们需要定义 Dockerfile 来描述如何构建镜像，并在其中配置一些环境变量、安装 Go、复制 Go 代码等。下面是一个示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="c"># 基于golang镜像创建一个新镜像</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> ubuntu</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ADD</span> bin/amd64/webserver /webserver<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 设置对外暴露的端口</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8080</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 运行 Go 应用程序</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> /webserver<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在上面的示例中，我们使用 ununtu 作为基础镜像。声明容器对外发布的端口号为 8080。最后，我们调用 ENTRYPOINT 指令来运行 Go 应用程序。因为我们是将二进制文件放置到容器中，所以容器中不需要有 golang 环境。我会在后续的文章中介绍几种不同的构建方式。</p>
+<h3 id="构建镜像" class="headerLink">
+    <a href="#%e6%9e%84%e5%bb%ba%e9%95%9c%e5%83%8f" class="header-mark"></a>构建镜像</h3><p>使用 Dockerfile 构建自定义镜像是一个非常简单的过程。首先，我们需要进入到包含 Dockerfile 的目录，然后运行以下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker build -t ares0x/webserver:<span class="si">${</span><span class="nv">tag</span><span class="si">}</span> .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中，-t 参数用于给镜像打标签，即为镜像指定一个名称。在这个示例中，我们将镜像命名为 my-go-app，后面的点表示使用当前目录中的 Dockerfile。</p>
+<p>构建成功后，我们就可以使用以下命令运行该镜像：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -p 8080:8080 ede5c3638067 <span class="c1">#ede5c3638067 为镜像的id</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时浏览器打开<strong>http://127.0.0.1:8080/</strong>，会返回<strong>Hello, Docker!</strong></p>
+<h3 id="使用-makefile" class="headerLink">
+    <a href="#%e4%bd%bf%e7%94%a8-makefile" class="header-mark"></a>使用 Makefile</h3><p>创建一个 Makefile 文件，并将我们上述使用到的命令都加进去</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="line"><span class="cl"><span class="k">export </span><span class="nv">tag</span><span class="o">=</span>v0.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">root</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">export</span> <span class="nv">root</span><span class="o">=</span>github.com/ares0x/practice
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">build</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;building webserver binary&#34;</span>
+</span></span><span class="line"><span class="cl">	mkdir -p bin/amd64
+</span></span><span class="line"><span class="cl">	<span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>amd64 go build -o bin/amd64
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">release</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s2">&#34;building webserver container&#34;</span>
+</span></span><span class="line"><span class="cl">	docker build -t ares0x/webserver:<span class="si">${</span><span class="nv">tag</span><span class="si">}</span> .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样，我们就可以通过 <strong>make build</strong> 来编译指定平台的二进制文件，通过 <strong>make release</strong> 来构建镜像。</p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-02-03</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" data-title="Mac下安装minikube" data-via="ares0x00" data-hashtags="Docker,Go"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Linkedin" data-sharer="linkedin" data-url="https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" title="Share on Reddit" data-sharer="reddit" data-url="https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/"><i class="fab fa-reddit fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://ares0x.me/posts/docker%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/" data-title="Mac下安装minikube"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/go/">Go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/go%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="next" rel="next" title="Go源码阅读 - 环境配置">Go源码阅读 - 环境配置<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.111.3">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"CKGU6AW9EO","algoliaIndex":"blog-index","algoliaSearchKey":"70b23c01cd5e46fc98c19812b0cb04ce","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"sharerjs":true,"table":{"sort":true}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '2781045083', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=2781045083" async></script></div>
+</body>
+
+</html>
