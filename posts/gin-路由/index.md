@@ -1,4 +1,4 @@
-# gin 框架
+# gin 框架 - 路由
 
 
 ## 简介
@@ -140,3 +140,62 @@ func Auth() gin.HandlerFunc {
 
 ## gin 路由原理
 
+```go
+type Engine struct{
+        ...
+    trees            methodTrees
+        ...
+}
+
+type methodTree struct {
+	method string
+	root   *node
+}
+
+// methodTree 中的每个节点
+type node struct {
+	path      string
+	indices   string // 索引
+	wildChild bool
+	nType     nodeType // 节点类型：static，root，param，catchAll
+	priority  uint32 // 优先级
+	children  []*node // 子节点
+	handlers  HandlersChain // HandlersChain 定义了一个 HandlerFunc 切片
+	fullPath  string // 完整路径
+}
+
+func New() *Engine {
+     engine := &Engine{
+        trees:                  make(methodTrees, 0, 9),
+     }
+}
+```
+在 Engine 结构中有一个名为 trees 的 methodTrees，它是 gin 路由结构中的方法树。在调用 New() 方法创建一个 Engine 时，会构建一个 cap 为 9 的 methodTrees slice。gin 会为 POST，GET 等请求分别创建一棵方法树。
+每当新增一个 handler，会调用 addRoute 方法
+```go
+func (engine *Engine) addRoute(method, path string, handlers HandlersChain) {
+	assert1(path[0] == '/', "path must begin with '/'")
+	assert1(method != "", "HTTP method can not be empty")
+	assert1(len(handlers) > 0, "there must be at least one handler")
+
+	debugPrintRoute(method, path, handlers)
+
+	root := engine.trees.get(method)
+	if root == nil {
+		root = new(node)
+		root.fullPath = "/"
+		engine.trees = append(engine.trees, methodTree{method: method, root: root})
+	}
+    // 将其加入到路由树中
+	root.addRoute(path, handlers)
+
+	// Update maxParams
+	if paramsCount := countParams(path); paramsCount > engine.maxParams {
+		engine.maxParams = paramsCount
+	}
+
+	if sectionsCount := countSections(path); sectionsCount > engine.maxSections {
+		engine.maxSections = sectionsCount
+	}
+}
+```

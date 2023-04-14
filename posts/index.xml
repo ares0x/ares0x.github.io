@@ -21,5 +21,23 @@
     <description><![CDATA[Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。
 为什么要用 Docker 更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）； 更快速的启动时间； 一致的运行环境； 持续交付和部署； 更轻松地迁移，维护和部署 Docker 常用操作 容器操作 启动 1 2 3 4 5 docker run # -it 交互 # -d 后台运行,如果不加 -d，从容器退出后该容器会停止运行 # -p 端口映射 # -v 硬盘挂载 eg:
 1 docker run centos -d # 启动一个 centos 容器，并进入容器内部 停止容器 1 docker stop xxx 启动已停止容器 1 docker start xxx 查看容器进程 1 2 docker ps # -a 查看所有容器（包括已停止的容器） 举例]]></description>
+</item><item>
+    <title>gin 框架 - 路由</title>
+    <link>https://ares0x.me/posts/gin-%E8%B7%AF%E7%94%B1/</link>
+    <pubDate>Fri, 03 Feb 2023 23:00:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/posts/gin-%E8%B7%AF%E7%94%B1/</guid>
+    <description><![CDATA[简介路由是指当客户端请求达到后端服务器后，根据请求的 HTTP 请求方法和 URL，找到对应的处理函数进行处理的过程。路由由 HTTP 请求方法，URL 和请求处理器组成。HTTP 请求方法指 HTTP 协议中定义的请求类型，常见的包括 GET、POST、PUT、DELETE 等。URL 指请求的资源在服务器上的路径，通常是由一个或多个单词或数字组成，在一定规则约束下可带上特定字符，例如斜杠、短横线等。请求处理器是指针对某一请求的响应处理函数。
+基本使用 基本路由 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import &#34;github.com/gin-gonic/gin&#34; func main() { g := gin.Default() g.Handle(&#34;GET&#34;, &#34;/hello&#34;, func(c *gin.Context) { c.JSON(200, gin.H{ &#34;message&#34;: &#34;Hello World!&#34;, }) }) g.Run(&#34;:8080&#34;) } 使用 g.Handle() 方法可以定义针对特定请求方法的路由。Handle() 方法的第一个参数是 HTTP 请求方法，第二个参数是 URL 路径，第三个参数是请求处理器函数。在上面的例子中，我们定义了一个针对 HTTP GET 方法、URL 路径为 /hello 的路由。当用户请求该路径时，路由器会调用”请求处理器函数”返回相应的 JSON 信息。
+除了上述方法外，我们还可以使用GET()、POST()、DELETE()等快捷方法定义路由。比如：]]></description>
+</item><item>
+    <title>gin 框架 - 简述</title>
+    <link>https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6/</link>
+    <pubDate>Thu, 02 Feb 2023 11:31:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6/</guid>
+    <description><![CDATA[gin 框架是一个使用Go语言编写的 web 框架，拥有很高的性能和可扩展性，在建立 Restful API 服务的时候非常方便。其中 gin 框架的路由功能非常重要，是实现所有请求分发的核心模块，可以用来定义请求的 URL 和 HTTP 方法，接受客户端请求并返回响应。 我会在后续一系列文章介绍 gin 框架的使用和原理。
+gin 文章目录：
+gin 路由 ]]></description>
 </item></channel>
 </rss>
