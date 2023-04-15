@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Mac下安装minikube - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="Mac下安装minikube" />
+<meta property="og:description" content="说明： 运行环境：MBP M1
+minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。
+安装 kubectlkubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 kubectl 安装文档 进行安装。安装文档中提供了三种安装方式，任选一种即可。
+使用kubectl version &ndash;client命令校验安装结果
+1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&#34;1&#34;, Minor:&#34;27&#34;, GitVersion:&#34;v1.27.1&#34;, GitCommit:&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2023-04-14T13:21:19Z&#34;, GoVersion:&#34;go1.20.3&#34;, Compiler:&#34;gc&#34;, Platform:&#34;darwin/arm64&#34;} Kustomize Version: v5." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-03T23:00:01+08:00" />
+<meta property="article:modified_time" content="2023-02-03T23:00:01+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mac下安装minikube"/>
+<meta name="twitter:description" content="说明： 运行环境：MBP M1
+minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。
+安装 kubectlkubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 kubectl 安装文档 进行安装。安装文档中提供了三种安装方式，任选一种即可。
+使用kubectl version &ndash;client命令校验安装结果
+1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&#34;1&#34;, Minor:&#34;27&#34;, GitVersion:&#34;v1.27.1&#34;, GitCommit:&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2023-04-14T13:21:19Z&#34;, GoVersion:&#34;go1.20.3&#34;, Compiler:&#34;gc&#34;, Platform:&#34;darwin/arm64&#34;} Kustomize Version: v5."/>
+<meta name="application-name" content="ares0x&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/" /><link rel="prev" href="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E7%AE%80%E8%BF%B0/" /><link rel="next" href="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Mac下安装minikube",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ares0x.me\/posts\/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube\/"
+        },"genre": "posts","keywords": "Docker, Go, kubernetes","wordcount":  366 ,
+        "url": "https:\/\/ares0x.me\/posts\/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube\/","datePublished": "2023-02-03T23:00:01+08:00","dateModified": "2023-02-03T23:00:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": "ares0x"},"author": {
+                "@type": "Person",
+                "name": "ares0x"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于我 </a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="Switch Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="black">Black</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于我</a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" class="menu-item theme-select" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="Switch Theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="black">Black</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "false")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mac下安装minikube</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
+                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-03">2023-02-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-02-03">2023-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;366 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装-kubectl">安装 kubectl</a></li>
+    <li><a href="#安装-minikube">安装 minikube</a></li>
+    <li><a href="#创建集群">创建集群</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>说明：
+运行环境：MBP M1</p>
+<p>minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。</p>
+<h2 id="安装-kubectl" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85-kubectl" class="header-mark"></a>安装 kubectl</h2><p>kubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#install-kubectl-on-macos" target="_blank" rel="noopener noreferrer">kubectl 安装文档</a> 进行安装。安装文档中提供了三种安装方式，任选一种即可。</p>
+<p>使用<strong>kubectl version &ndash;client</strong>命令校验安装结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ➜ kubectl version --client
+</span></span><span class="line"><span class="cl">WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output<span class="o">=</span>yaml<span class="p">|</span>json to get the full version.
+</span></span><span class="line"><span class="cl">Client Version: version.Info<span class="o">{</span>Major:<span class="s2">&#34;1&#34;</span>, Minor:<span class="s2">&#34;27&#34;</span>, GitVersion:<span class="s2">&#34;v1.27.1&#34;</span>, GitCommit:<span class="s2">&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;</span>, GitTreeState:<span class="s2">&#34;clean&#34;</span>, BuildDate:<span class="s2">&#34;2023-04-14T13:21:19Z&#34;</span>, GoVersion:<span class="s2">&#34;go1.20.3&#34;</span>, Compiler:<span class="s2">&#34;gc&#34;</span>, Platform:<span class="s2">&#34;darwin/arm64&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Kustomize Version: v5.0.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装-minikube" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85-minikube" class="header-mark"></a>安装 minikube</h2><p>可以参考 <a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener noreferrer">minikube 安装文档</a> 进行安装。在该文档中选择与自己相同的系统来获取安装命令。我的机器是 Mac M1，所以选择</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Operating system：macOS
+</span></span><span class="line"><span class="cl">Architecture：ARM64
+</span></span><span class="line"><span class="cl">Release type：Stable
+</span></span><span class="line"><span class="cl">Installer type：Homebrew
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Release 和 Installer 可以根据自己的需求选择。</p>
+<h2 id="创建集群" class="headerLink">
+    <a href="#%e5%88%9b%e5%bb%ba%e9%9b%86%e7%be%a4" class="header-mark"></a>创建集群</h2><p>使用<strong>minikube start</strong>即可创建集群，如果出现以下内容表示创建成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ➜ minikube start
+</span></span><span class="line"><span class="cl">😄  minikube v1.30.1 on Darwin 13.0 <span class="o">(</span>arm64<span class="o">)</span>
+</span></span><span class="line"><span class="cl">✨  Automatically selected the docker driver. Other choices: virtualbox, ssh
+</span></span><span class="line"><span class="cl">📌  Using Docker Desktop driver with root privileges
+</span></span><span class="line"><span class="cl">❗  Local proxy ignored: not passing <span class="nv">HTTP_PROXY</span><span class="o">=</span>http://127.0.0.1:7890 to docker env.
+</span></span><span class="line"><span class="cl">❗  Local proxy ignored: not passing <span class="nv">HTTPS_PROXY</span><span class="o">=</span>http://127.0.0.1:7890 to docker env.
+</span></span><span class="line"><span class="cl">👍  Starting control plane node minikube in cluster minikube
+</span></span><span class="line"><span class="cl">🚜  Pulling base image ...
+</span></span><span class="line"><span class="cl">💾  Downloading Kubernetes v1.26.3 preload ...
+</span></span><span class="line"><span class="cl">    &gt; preloaded-images-k8s-v18-v1...:  330.52 MiB / 330.52 MiB  100.00% 16.06 M
+</span></span><span class="line"><span class="cl">    &gt; gcr.io/k8s-minikube/kicbase...:  336.39 MiB / 336.39 MiB  100.00% 9.44 Mi
+</span></span><span class="line"><span class="cl">🔥  Creating docker container <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>3633MB<span class="o">)</span> ...
+</span></span><span class="line"><span class="cl">❗  Local proxy ignored: not passing <span class="nv">HTTP_PROXY</span><span class="o">=</span>http://127.0.0.1:7890 to docker env.
+</span></span><span class="line"><span class="cl">❗  Local proxy ignored: not passing <span class="nv">HTTPS_PROXY</span><span class="o">=</span>http://127.0.0.1:7890 to docker env.
+</span></span><span class="line"><span class="cl">🌐  Found network options:
+</span></span><span class="line"><span class="cl">    ▪ <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:7890
+</span></span><span class="line"><span class="cl">❗  You appear to be using a proxy, but your NO_PROXY environment does not include the minikube IP <span class="o">(</span>192.168.49.2<span class="o">)</span>.
+</span></span><span class="line"><span class="cl">📘  Please see https://minikube.sigs.k8s.io/docs/handbook/vpn_and_proxy/ <span class="k">for</span> more details
+</span></span><span class="line"><span class="cl">    ▪ <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:7890
+</span></span><span class="line"><span class="cl">🐳  Preparing Kubernetes v1.26.3 on Docker 23.0.2 ...
+</span></span><span class="line"><span class="cl">    ▪ Generating certificates and keys ...
+</span></span><span class="line"><span class="cl">    ▪ Booting up control plane ...
+</span></span><span class="line"><span class="cl">    ▪ Configuring RBAC rules ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时，执行<strong>docker ps</strong>,可以看到启动了一个名为 minikube 的容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">¥ ➜ docker ps
+</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS         PORTS                                                                                                                                  NAMES
+</span></span><span class="line"><span class="cl">fb06965b2811   gcr.io/k8s-minikube/kicbase:v0.0.39   <span class="s2">&#34;/usr/local/bin/entr…&#34;</span>   <span class="m">6</span> minutes ago   Up <span class="m">6</span> minutes   127.0.0.1:50875-&gt;22/tcp, 127.0.0.1:50876-&gt;2376/tcp, 127.0.0.1:50878-&gt;5000/tcp, 127.0.0.1:50879-&gt;8443/tcp, 127.0.0.1:50877-&gt;32443/tcp   minikube
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再执行<strong>kubectl cluster-info</strong>可以验证集群是否配置正确</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ➜ kubectl cluster-info
+</span></span><span class="line"><span class="cl">Kubernetes control plane is running at https://127.0.0.1:50879
+</span></span><span class="line"><span class="cl">CoreDNS is running at https://127.0.0.1:50879/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">To further debug and diagnose cluster problems, use <span class="s1">&#39;kubectl cluster-info dump&#39;</span>.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用<strong>minikube dashboard</strong>会打开一个浏览器页面，在此可以查看集群当前状态</p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-02-03</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/" data-title="Mac下安装minikube" data-via="ares0x00" data-hashtags="Docker,Go,kubernetes"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Linkedin" data-sharer="linkedin" data-url="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" title="Share on Reddit" data-sharer="reddit" data-url="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/"><i class="fab fa-reddit fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/" data-title="Mac下安装minikube"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/kubernetes/">kubernetes</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/gin-%E6%A1%86%E6%9E%B6-%E7%AE%80%E8%BF%B0/" class="prev" rel="prev" title="gin 框架 - 简述"><i class="fas fa-angle-left fa-fw"></i>gin 框架 - 简述</a>
+            <a href="/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/" class="next" rel="next" title="gin 框架 - 路由">gin 框架 - 路由<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.111.3">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"CKGU6AW9EO","algoliaIndex":"blog-index","algoliaSearchKey":"70b23c01cd5e46fc98c19812b0cb04ce","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"sharerjs":true,"table":{"sort":true}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '2781045083', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=2781045083" async></script></div>
+</body>
+
+</html>
