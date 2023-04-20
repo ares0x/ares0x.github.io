@@ -1,4 +1,4 @@
-# Docker简易操作
+# Mac 下安装 chatglm-6b
 
 
 环境：
