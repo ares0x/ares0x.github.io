@@ -52,5 +52,5 @@ python cli_demo.py
 ```
 
 ## Reference
-[用 10 万条微信聊天记录和 280 篇博客文章，我克隆了一个数字版自己](https://sspai.com/post/79230)
-[ChatGLM-6B README.md](https://github.com/THUDM/ChatGLM-6B/blob/main/README.md)
+* [用 10 万条微信聊天记录和 280 篇博客文章，我克隆了一个数字版自己](https://sspai.com/post/79230)
+* [ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B/blob/main/README.md)
