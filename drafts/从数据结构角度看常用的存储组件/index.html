@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title> - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="" />
+<meta property="og:description" content="从数据结构角度看常用的存储组件I. 介绍 • 简述存储组件的常见类型及其原理 • 阐述数据结构对于选择存储组件的重要性
+II. 面向键值对存储的存储组件 • 简述键值对存储组件的概念和特点 • 阐述哈希表、B&#43;树作为数据结构在键值对存储中的应用 • 展示Redis、Memcached、LevelDB等常用的键值对存储组件的数据结构与技术实现
+III. 面向文档存储的存储组件 • 简述文档存储组件的概念和特点 • 阐述BSON、JSON等数据格式在文档存储中的应用 • 展示MongoDB、CouchDB等常用的文档存储组件的数据结构与技术实现
+IV. 面向关系型存储的存储组件 • 简述关系型存储组件的概念和特点 • 阐述B&#43;树、红黑树等数据结构在关系型存储中的应用 • 展示MySQL、PostgreSQL等常用的关系型存储组件的数据结构与技术实现
+V. 面向列存储的存储组件 • 简述列存储组件的概念和特点 • 阐述列式数据库中列、列族的概念和作用 • 展示HBase、Cassandra等常用的列存储组件的数据结构与技术实现
+VI. 存储组件的选择 • 阐述不同的存储组件如何根据数据类型、数据格式和操作需求来选择 • 分析不同存储组件的优缺点和适用场景" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ares0x.me/drafts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6/" /><meta property="article:section" content="drafts" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="从数据结构角度看常用的存储组件I. 介绍 • 简述存储组件的常见类型及其原理 • 阐述数据结构对于选择存储组件的重要性
+II. 面向键值对存储的存储组件 • 简述键值对存储组件的概念和特点 • 阐述哈希表、B&#43;树作为数据结构在键值对存储中的应用 • 展示Redis、Memcached、LevelDB等常用的键值对存储组件的数据结构与技术实现
+III. 面向文档存储的存储组件 • 简述文档存储组件的概念和特点 • 阐述BSON、JSON等数据格式在文档存储中的应用 • 展示MongoDB、CouchDB等常用的文档存储组件的数据结构与技术实现
+IV. 面向关系型存储的存储组件 • 简述关系型存储组件的概念和特点 • 阐述B&#43;树、红黑树等数据结构在关系型存储中的应用 • 展示MySQL、PostgreSQL等常用的关系型存储组件的数据结构与技术实现
+V. 面向列存储的存储组件 • 简述列存储组件的概念和特点 • 阐述列式数据库中列、列族的概念和作用 • 展示HBase、Cassandra等常用的列存储组件的数据结构与技术实现
+VI. 存储组件的选择 • 阐述不同的存储组件如何根据数据类型、数据格式和操作需求来选择 • 分析不同存储组件的优缺点和适用场景"/>
+<meta name="application-name" content="ares0x&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/drafts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6/" /><link rel="prev" href="https://ares0x.me/drafts/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" /><link rel="next" href="https://ares0x.me/drafts/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ares0x.me\/drafts\/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6\/"
+        },"genre": "drafts","wordcount":  44 ,
+        "url": "https:\/\/ares0x.me\/drafts\/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6\/","publisher": {
+            "@type": "Organization",
+            "name": "ares0x"},"author": {
+                "@type": "Person",
+                "name": "ares0x"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于我 </a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="Switch Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="black">Black</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于我</a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" class="menu-item theme-select" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="Switch Theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="black">Black</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster"></h1><div class="content" id="content"><h1 id="从数据结构角度看常用的存储组件" class="headerLink">
+    <a href="#%e4%bb%8e%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e8%a7%92%e5%ba%a6%e7%9c%8b%e5%b8%b8%e7%94%a8%e7%9a%84%e5%ad%98%e5%82%a8%e7%bb%84%e4%bb%b6" class="header-mark"></a>从数据结构角度看常用的存储组件</h1><p>I. 介绍
+• 简述存储组件的常见类型及其原理
+• 阐述数据结构对于选择存储组件的重要性</p>
+<p>II. 面向键值对存储的存储组件
+• 简述键值对存储组件的概念和特点
+• 阐述哈希表、B+树作为数据结构在键值对存储中的应用
+• 展示Redis、Memcached、LevelDB等常用的键值对存储组件的数据结构与技术实现</p>
+<p>III. 面向文档存储的存储组件
+• 简述文档存储组件的概念和特点
+• 阐述BSON、JSON等数据格式在文档存储中的应用
+• 展示MongoDB、CouchDB等常用的文档存储组件的数据结构与技术实现</p>
+<p>IV. 面向关系型存储的存储组件
+• 简述关系型存储组件的概念和特点
+• 阐述B+树、红黑树等数据结构在关系型存储中的应用
+• 展示MySQL、PostgreSQL等常用的关系型存储组件的数据结构与技术实现</p>
+<p>V. 面向列存储的存储组件
+• 简述列存储组件的概念和特点
+• 阐述列式数据库中列、列族的概念和作用
+• 展示HBase、Cassandra等常用的列存储组件的数据结构与技术实现</p>
+<p>VI. 存储组件的选择
+• 阐述不同的存储组件如何根据数据类型、数据格式和操作需求来选择
+• 分析不同存储组件的优缺点和适用场景</p>
+</div></div></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.111.3">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"CKGU6AW9EO","algoliaIndex":"blog-index","algoliaSearchKey":"70b23c01cd5e46fc98c19812b0cb04ce","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"sharerjs":true,"table":{"sort":true}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '2781045083', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=2781045083" async></script></div>
+</body>
+
+</html>

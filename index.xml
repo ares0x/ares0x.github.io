@@ -16,6 +16,15 @@
 1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) .]]></description>
 </item><item>
     <title>Docker简易操作</title>
+    <link>https://ares0x.me/posts/chatglm-6b/</link>
+    <pubDate>Fri, 03 Feb 2023 23:00:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/posts/chatglm-6b/</guid>
+    <description><![CDATA[环境：
+机器：mbp m1 pro python：Python 3.9.6 pip: pip 21.2.4 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9) 注意： 本次安装使用代理并启动了终端代理
+安装配置 git-lfs 1 2 3 4 # 安装 brew install git-lfs # 验证安装 git lfs install 下载代码 1 2 3 4 5 # 下载代码 git clone https://github.com/THUDM/ChatGLM-6B.git # 安装依赖 cd ChatGLM-6B &amp;&amp; pip3 install -r requirements.txt 下载并验证模型 1 2 3 4 5 6 7 # 下载模型 git clone https://huggingface.co/THUDM/chatglm-6b # 此过程会耗时一段时间，你可以去接杯水 # 进入模型所在目录 cd chatglm-6b # 验证模型 shasum -a 256 ice_text.]]></description>
+</item><item>
+    <title>Docker简易操作</title>
     <link>https://ares0x.me/posts/docker-%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/</link>
     <pubDate>Fri, 03 Feb 2023 23:00:01 &#43;0800</pubDate><author>
         <name>ares0x</name>

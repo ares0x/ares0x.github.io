@@ -37,12 +37,13 @@
     </item>
     
     <item>
-      <title>gin 框架</title>
+      <title>短 url 设计</title>
       <link>https://ares0x.me/drafts/%E7%9F%ADurl%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Fri, 03 Feb 2023 23:00:01 +0800</pubDate>
       <author>jialijun1024@gmail.com (ares0x)</author>
       <guid>https://ares0x.me/drafts/%E7%9F%ADurl%E8%AE%BE%E8%AE%A1/</guid>
-      <description>短链接是一种能将原始网址缩短为更短的链接的技术。通常用于减少 URL 的长度，便于在短信或社交媒体等渠道中传播链接，同时可以进行统计分析。 • 原理简介：短链接的原理是通过一个短的地址来代替原始地址，将目标网址与短地址进行映射，当访问短链接时，服务器会将客户端重定向到目标网址。</description>
+      <description>短链接是一种能将原始网址缩短为更短的链接的技术。通常用于减少 URL 的长度，便于在短信或社交媒体等渠道中传播链接，同时可以进行统计分析。 • 原理简介：短链接的原理是通过一个短的地址来代替原始地址，将目标网址与短地址进行映射，当访问短链接时，服务器会将客户端重定向到目标网址。
+几个问题 短 url 的长度 跳转方式 301 OR 302 转换算法 核心逻辑 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 // Encode 生成短链接并存储 func Encode(originalUrl string) string { uuid := time.Now().UnixNano() // uuid 可以通过多种方式生成，如，redis incr，独立的发号器等 var shortUrl string for uuid &amp;gt; 0 { shortUrl = string(constvar.Seed[uuid%62]) + shortUrl uuid = uuid / 62 } // TODO 将 uuid，originalUrl（原始 url）和 shortUrl 组成的三元组存储 return shortUrl } // Decode 根据短链接获取原始链接 func Decode(shortUrl string) (string, error) { // 根据短链接获取唯一id var id int64 n := len(shortUrl) for i := 0; i &amp;lt; n; i++ { pos := strings.</description>
     </item>
     
     <item>
@@ -65,6 +66,52 @@
     
     <item>
       <title></title>
+      <link>https://ares0x.me/drafts/vim%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>jialijun1024@gmail.com (ares0x)</author>
+      <guid>https://ares0x.me/drafts/vim%E8%AE%B0%E5%BD%95/</guid>
+      <description> vim 删除 1 2 3 4 x 删除光标所在位置的字符 dw 删除一个词 dd 删除一正行 d[n]d 删除n行 移动 1 2 3 4 gg 移动到首行 shift+G 移动到尾行 $ 移动到行尾 移动到行首 复制粘贴 1 2 3 复制 剪切 粘贴 操作 1 2 . 会重复上次操作 u 会撤销上次操作 缩进 1 2 &amp;lt;G 向前缩进 &amp;gt;G 向后缩进 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ares0x.me/drafts/%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>jialijun1024@gmail.com (ares0x)</author>
+      <guid>https://ares0x.me/drafts/%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B/</guid>
+      <description>使用工具让开发规范落地项目地址
+在一个项目/功能的开发周期内，可能会有多个开发人员can需要对代码进行多次修改
+Makefile常用的功能：
+format lint test build gitlint 让工具强制 Refrence使用持续集成 什么是持续交付 敏捷开发入门教程 Commit message 和 Change log 编写指南 利用 git hook 规范你的代码与 commit message github</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ares0x.me/drafts/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>jialijun1024@gmail.com (ares0x)</author>
+      <guid>https://ares0x.me/drafts/%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7/</guid>
+      <description>gotests, 一个自动生成测试用例的工具
+1 2 3 4 5 6 # 安装 go get -u github.com/cweill/gotests/... # 使用 # 进入测试代码所在目录 gotests -all -w . gomock，一个 mock 框架
+1 2 $ go get github.com/golang/mock/gomock $ go install github.com/golang/mock/mockgen </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ares0x.me/drafts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>jialijun1024@gmail.com (ares0x)</author>
+      <guid>https://ares0x.me/drafts/%E4%BB%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%84%E4%BB%B6/</guid>
+      <description>从数据结构角度看常用的存储组件I. 介绍 • 简述存储组件的常见类型及其原理 • 阐述数据结构对于选择存储组件的重要性
+II. 面向键值对存储的存储组件 • 简述键值对存储组件的概念和特点 • 阐述哈希表、B+树作为数据结构在键值对存储中的应用 • 展示Redis、Memcached、LevelDB等常用的键值对存储组件的数据结构与技术实现
+III. 面向文档存储的存储组件 • 简述文档存储组件的概念和特点 • 阐述BSON、JSON等数据格式在文档存储中的应用 • 展示MongoDB、CouchDB等常用的文档存储组件的数据结构与技术实现
+IV. 面向关系型存储的存储组件 • 简述关系型存储组件的概念和特点 • 阐述B+树、红黑树等数据结构在关系型存储中的应用 • 展示MySQL、PostgreSQL等常用的关系型存储组件的数据结构与技术实现
+V. 面向列存储的存储组件 • 简述列存储组件的概念和特点 • 阐述列式数据库中列、列族的概念和作用 • 展示HBase、Cassandra等常用的列存储组件的数据结构与技术实现
+VI. 存储组件的选择 • 阐述不同的存储组件如何根据数据类型、数据格式和操作需求来选择 • 分析不同存储组件的优缺点和适用场景</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://ares0x.me/drafts/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>jialijun1024@gmail.com (ares0x)</author>
@@ -83,11 +130,21 @@
     
     <item>
       <title></title>
-      <link>https://ares0x.me/drafts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E5%B8%B8%E7%94%A8%E5%AD%98%E5%82%A8%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>https://ares0x.me/drafts/%E6%92%AE%E5%90%88%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>jialijun1024@gmail.com (ares0x)</author>
-      <guid>https://ares0x.me/drafts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E5%B8%B8%E7%94%A8%E5%AD%98%E5%82%A8%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-      <description> MySQL 哈希索引 Redis SkipList MongoDB</description>
+      <guid>https://ares0x.me/drafts/%E6%92%AE%E5%90%88%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1/</guid>
+      <description>在交易系统中，撮合引擎是一个核心的组件，它需要承接海量的交易 架构设计没有银弹。对于一个交易系统，在交易和撮合这个步骤就已经出现了分歧。 可以选择将交易和撮合耦合在一起，这样用户下单以后就可以直接进入撮合逻辑 将加以和撮合拆分，最大程度上保证功能的独立，后续扩展也会相对更方便一些。 两种方案的逻辑调用如下</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://ares0x.me/drafts/%E9%99%90%E6%B5%81/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>jialijun1024@gmail.com (ares0x)</author>
+      <guid>https://ares0x.me/drafts/%E9%99%90%E6%B5%81/</guid>
+      <description>限流最近大火的 chatGPT
+Refrencehttps://aws.amazon.com/cn/blogs/china/design-billing-system-on-aws-marketplace-saas-architecture/</description>
     </item>
     
   </channel>
