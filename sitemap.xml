@@ -2,11 +2,11 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://ares0x.me/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://ares0x.me/drafts/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://ares0x.me/drafts/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://ares0x.me/drafts/%E6%8A%93%E5%8C%85/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://ares0x.me/drafts/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%93-%E6%A0%91/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ares0x.me/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/drafts/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/drafts/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/drafts/%E6%8A%93%E5%8C%85/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/drafts/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BD%93-%E6%A0%91/</loc><lastmod>2023-04-01T11:31:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/categories/</loc><lastmod>2023-02-06T22:29:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/tags/go/</loc><lastmod>2023-02-06T22:29:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc><lastmod>2023-02-06T22:29:00&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
