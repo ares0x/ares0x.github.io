@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>交易系统，撮合引擎 - Tag - ares0x&#39;s blog</title>
+        <link>https://ares0x.me/tags/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E6%92%AE%E5%90%88%E5%BC%95%E6%93%8E/</link>
+        <description>交易系统，撮合引擎 - Tag - ares0x&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>jialijun1024@gmail.com (ares0x)</managingEditor>
+            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Sat, 01 Apr 2023 11:31:01 &#43;0800</lastBuildDate><atom:link href="https://ares0x.me/tags/%E4%BA%A4%E6%98%93%E7%B3%BB%E7%BB%9F%E6%92%AE%E5%90%88%E5%BC%95%E6%93%8E/" rel="self" type="application/rss+xml" /><item>
+    <title>撮合引擎的设计</title>
+    <link>https://ares0x.me/drafts/%E6%92%AE%E5%90%88%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1/</link>
+    <pubDate>Sat, 01 Apr 2023 11:31:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/drafts/%E6%92%AE%E5%90%88%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1/</guid>
+    <description><![CDATA[在交易系统中，撮合引擎是一个核心的组件，它需要承接海量的交易 架构设计没有银弹。对于一个交易系统，在交易和撮合这个步骤就已经出现了分歧。 可以选择将交易和撮合耦合在一起，这样用户下单以后就可以直接进入撮合逻辑 将加以和撮合拆分，最大程度上保证功能的独立，后续扩展也会相对更方便一些。 两种方案的逻辑调用如下]]></description>
+</item></channel>
+</rss>

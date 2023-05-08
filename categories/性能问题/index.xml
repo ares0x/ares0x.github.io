@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>性能问题 - Category - ares0x&#39;s blog</title>
+        <link>https://ares0x.me/categories/%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98/</link>
+        <description>性能问题 - Category - ares0x&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>jialijun1024@gmail.com (ares0x)</managingEditor>
+            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Thu, 02 Feb 2023 11:31:01 &#43;0800</lastBuildDate><atom:link href="https://ares0x.me/categories/%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98/" rel="self" type="application/rss+xml" /><item>
+    <title>gin 框架 - 简述</title>
+    <link>https://ares0x.me/drafts/%E4%BD%BF%E7%94%A8-tcpdum-%E6%8A%93%E5%8C%85/</link>
+    <pubDate>Thu, 02 Feb 2023 11:31:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/drafts/%E4%BD%BF%E7%94%A8-tcpdum-%E6%8A%93%E5%8C%85/</guid>
+    <description><![CDATA[在开发过程中，难免会碰到一些需要解决的 bug，除了编程语言提供的 profiling，我们也需要学会使用常用的排查工具来进行网络分析。
+常用功能 指定网卡 指定抓包数量 保存为特定文件 去除时间显示 不解析ip地址和端口号 1 2 tcpdump -nn 完整示例 抓包 Nginx 抓包 Go 程序]]></description>
+</item></channel>
+</rss>

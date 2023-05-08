@@ -1,4 +1,4 @@
-# Mac 下安装 chatglm-6b
+# Mac下安装 chatglm-6b
 
 
 环境：
@@ -47,7 +47,7 @@ model = AutoModel.from_pretrained("/Users/ares/workspace/python/projects/ChatGLM
 ```
 
 ## 启动交互环境
-```
+```shell
 python cli_demo.py
 ```
 

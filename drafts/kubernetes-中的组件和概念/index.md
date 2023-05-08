@@ -1,0 +1,8 @@
+# 
+
+
+kubectl
+
+pod
+
+
