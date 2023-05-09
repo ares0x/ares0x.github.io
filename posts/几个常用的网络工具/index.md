@@ -131,7 +131,7 @@ Established: The count of bytes not acknowledged by the remote host.
 Listening: Since Kernel 2.6.18 this column contains the maximum size of the syn backlog.
 ```
 2. 连接的状态
-![连接状态](../../static/images/socket_stat.png)
+![连接状态](/images//socket_stat.png)
 
 ## Reference
 - [关于 Recv-Q 和 Send-Q 的说明](https://github.com/moooofly/MarkSomethingDown/blob/master/Linux/%E5%85%B3%E4%BA%8E%20Recv-Q%20%E5%92%8C%20Send-Q%20%E7%9A%84%E8%AF%B4%E6%98%8E.md)
