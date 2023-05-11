@@ -2,15 +2,15 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://ares0x.me/categories/ai/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://ares0x.me/categories/ai/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
             <loc>https://ares0x.me/</loc><lastmod>2023-05-08T16:45:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ares0x.me/categories/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://ares0x.me/tags/chatglm/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://ares0x.me/tags/llm/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://ares0x.me/posts/mac-%E4%B8%8B%E5%AE%89%E8%A3%85-chatglm-6b/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://ares0x.me/tags/nlp/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://ares0x.me/posts/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
-            <loc>https://ares0x.me/tags/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+            <loc>https://ares0x.me/categories/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ares0x.me/tags/chatglm/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ares0x.me/tags/llm/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ares0x.me/posts/mac-%E4%B8%8B%E5%AE%89%E8%A3%85-chatglm-6b/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ares0x.me/tags/nlp/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ares0x.me/posts/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ares0x.me/tags/</loc><lastmod>2023-04-12T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
             <loc>https://ares0x.me/tags/docker/</loc><lastmod>2023-04-01T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/tags/go/</loc><lastmod>2023-04-01T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/tags/kubernetes/</loc><lastmod>2023-04-01T23:00:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
