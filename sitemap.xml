@@ -62,7 +62,7 @@
             <loc>https://ares0x.me/drafts/%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D%E5%92%8C%E8%A7%A3%E5%86%B3/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/drafts/%E7%88%AC%E8%99%AB/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/drafts/%E9%99%90%E6%B5%81/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-            <loc>https://ares0x.me/readme/</loc><priority>0</priority></url><url>
-            <loc>https://ares0x.me/sql-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</loc><priority>0</priority></url><url>
+            <loc>https://ares0x.me/readme/</loc><lastmod>2023-02-05T15:39:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
+            <loc>https://ares0x.me/sql-%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/authors/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ares0x.me/series/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url></urlset>
