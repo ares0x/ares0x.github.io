@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>前端项目脚手架 - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="前端项目脚手架" />
+<meta property="og:description" content="技术栈 pnpm vite React TypeScript Tailwind CSS 详情 创建项目 1 2 3 4 5 6 # 使用 create-react-app 创建一个 typescript 格式的项目 pnpm create vite [project-name] --template react-ts cd [project-name] pnpm install pnpm run dev 项目的目录结构和页面展示如下图所示
+修改相对路径 在 tsconfig.json 中的 compilerOptions 下添加**&ldquo;baseUrl&rdquo;: &ldquo;./src&rdquo;,** ，tsconfig.json 为 1 2 3 4 5 6 { &#34;compilerOptions&#34;: { &#34;baseUrl&#34;: &#34;./src&#34;, # 添加的路径 &#34;target&#34;: &#34;es5&#34;, # ... } 添加代码格式化工具 参考prettier官方文档 1 2 3 4 5 6 # 下载依赖 yarn add --dev --exact prettier # 创建配置 echo {}&gt; ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ares0x.me/drafts/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" /><meta property="article:section" content="drafts" />
+<meta property="article:published_time" content="2023-05-20T10:00:01+08:00" />
+<meta property="article:modified_time" content="2023-05-20T10:00:01+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="前端项目脚手架"/>
+<meta name="twitter:description" content="技术栈 pnpm vite React TypeScript Tailwind CSS 详情 创建项目 1 2 3 4 5 6 # 使用 create-react-app 创建一个 typescript 格式的项目 pnpm create vite [project-name] --template react-ts cd [project-name] pnpm install pnpm run dev 项目的目录结构和页面展示如下图所示
+修改相对路径 在 tsconfig.json 中的 compilerOptions 下添加**&ldquo;baseUrl&rdquo;: &ldquo;./src&rdquo;,** ，tsconfig.json 为 1 2 3 4 5 6 { &#34;compilerOptions&#34;: { &#34;baseUrl&#34;: &#34;./src&#34;, # 添加的路径 &#34;target&#34;: &#34;es5&#34;, # ... } 添加代码格式化工具 参考prettier官方文档 1 2 3 4 5 6 # 下载依赖 yarn add --dev --exact prettier # 创建配置 echo {}&gt; ."/>
+<meta name="application-name" content="ares0x&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/drafts/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" /><link rel="prev" href="https://ares0x.me/drafts/%E6%8A%93%E5%8C%85/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "前端项目脚手架",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ares0x.me\/drafts\/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE\/"
+        },"genre": "drafts","keywords": "React, 前端, 全栈","wordcount":  248 ,
+        "url": "https:\/\/ares0x.me\/drafts\/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE\/","datePublished": "2023-05-20T10:00:01+08:00","dateModified": "2023-05-20T10:00:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": "ares0x"},"author": {
+                "@type": "Person",
+                "name": "ares0x"
+            },"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于我 </a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="Switch Theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="black">Black</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ares0x&#39;s blog">ares0x&#39;s blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于我</a><a class="menu-item" href="https://github.com/ares0x" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" class="menu-item theme-select" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="Switch Theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="black">Black</option>
+                    <option value="auto">Auto</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">前端项目脚手架</h1><div class="content" id="content"><h2 id="技术栈" class="headerLink">
+    <a href="#%e6%8a%80%e6%9c%af%e6%a0%88" class="header-mark"></a>技术栈</h2><ul>
+<li>pnpm</li>
+<li>vite</li>
+<li>React</li>
+<li>TypeScript</li>
+<li>Tailwind CSS</li>
+</ul>
+<h2 id="详情" class="headerLink">
+    <a href="#%e8%af%a6%e6%83%85" class="header-mark"></a>详情</h2><ol>
+<li>创建项目</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 使用 create-react-app 创建一个 typescript 格式的项目</span>
+</span></span><span class="line"><span class="cl">pnpm create vite <span class="o">[</span>project-name<span class="o">]</span> --template react-ts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="o">[</span>project-name<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">pnpm install
+</span></span><span class="line"><span class="cl">pnpm run dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>项目的目录结构和页面展示如下图所示</p>
+<ol start="2">
+<li>修改相对路径
+在 tsconfig.json 中的 compilerOptions 下添加**&ldquo;baseUrl&rdquo;: &ldquo;./src&rdquo;,** ，tsconfig.json 为</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;compilerOptions&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;baseUrl&#34;</span>: <span class="s2">&#34;./src&#34;</span>, <span class="c1"># 添加的路径</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;target&#34;</span>: <span class="s2">&#34;es5&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="c1"># ... </span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>   
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>添加代码格式化工具
+参考<a href="https://prettier.io/docs/en/install.html" target="_blank" rel="noopener noreferrer">prettier官方文档</a></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载依赖</span>
+</span></span><span class="line"><span class="cl">yarn add --dev --exact prettier
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建配置</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">{}</span>&gt; .prettierrc.json
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建 ignore</span>
+</span></span><span class="line"><span class="cl">touch .prettierignore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>添加 precommit-hook
+参考<a href="https://prettier.io/docs/en/precommit.html" target="_blank" rel="noopener noreferrer">precommit</a></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 添加 precommit 依赖</span>
+</span></span><span class="line"><span class="cl">npx mrm@2 lint-staged
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>lint</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装 eslint-config-prettier 依赖</span>
+</span></span><span class="line"><span class="cl">yarn add  eslint-config-prettier -D
+</span></span><span class="line"><span class="cl"><span class="c1"># package.json 的 eslintConfig.extends 中添加</span>
+</span></span><span class="line"><span class="cl"> <span class="s2">&#34;prettier&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>规范 commit
+参考<a href="https://github.com/conventional-changelog/commitlint" target="_blank" rel="noopener noreferrer">commitlint README</a></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装依赖</span>
+</span></span><span class="line"><span class="cl">yarn add @commitlint/<span class="o">{</span>config-conventional,cli<span class="o">}</span>
+</span></span><span class="line"><span class="cl">yarn add @commitlint/config-conventional @commitlint/cli
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建commitlint.config.js</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;module.exports = {extends: [&#39;@commitlint/config-conventional&#39;]}&#34;</span> &gt; commitlint.config.js
+</span></span><span class="line"><span class="cl"><span class="c1"># 在package.json中添加</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;commit-msg&#34;</span>: <span class="s2">&#34;commitlint -E HUSKY_GIT_PARAMS&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>引入 tailwind</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pnpm install -D tailwindcss postcss autoprefixer
+</span></span><span class="line"><span class="cl">npx tailwindcss init -p
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建 tailwind.config.js 文件</span>
+</span></span><span class="line"><span class="cl">touch tailwind.config.js
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>并在 tailwind.config.js 中写入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="cm">/** @type {import(&#39;tailwindcss&#39;).Config} */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">content</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;./index.html&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;./src/**/*.{js,ts,jsx,tsx}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">theme</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">extend</span><span class="o">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">plugins</span><span class="o">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="mock-方案" class="headerLink">
+    <a href="#mock-%e6%96%b9%e6%a1%88" class="header-mark"></a>mock 方案</h2><ol>
+<li>
+<p>写死数据</p>
+</li>
+<li>
+<p>mock.js</p>
+</li>
+<li>
+<p>接口管理工具
+yapi，swagger，rap</p>
+</li>
+<li>
+<p>json-server</p>
+</li>
+</ol>
+<h2 id="常见问题的解决方法" class="headerLink">
+    <a href="#%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%b3%95" class="header-mark"></a>常见问题的解决方法</h2><ol>
+<li>Cannot find module Please verify that the package.json has a valid &ldquo;main&rdquo; entry nuxtjs error on npm run dev</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rm -rf node_modules
+</span></span><span class="line"><span class="cl">pnpm install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="相关链接" class="headerLink">
+    <a href="#%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5" class="header-mark"></a>相关链接</h2><p><a href="https://cn.vitejs.dev/guide/" target="_blank" rel="noopener noreferrer">vite 中文文档</a>
+<a href="https://www.pnpm.cn/" target="_blank" rel="noopener noreferrer">pnpm 中文网</a></p>
+</div></div></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.112.5">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"CKGU6AW9EO","algoliaIndex":"blog-index","algoliaSearchKey":"70b23c01cd5e46fc98c19812b0cb04ce","highlightTag":"em","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"algolia"},"sharerjs":true,"table":{"sort":true}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script><script type="text/javascript">
+            window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());
+            gtag('config', '2781045083', { 'anonymize_ip': true });
+        </script><script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=2781045083" async></script></div>
+</body>
+
+</html>

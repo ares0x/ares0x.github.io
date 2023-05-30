@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>React - Tag - ares0x&#39;s blog</title>
+        <link>https://ares0x.me/tags/react/</link>
+        <description>React - Tag - ares0x&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>jialijun1024@gmail.com (ares0x)</managingEditor>
+            <webMaster>jialijun1024@gmail.com (ares0x)</webMaster><lastBuildDate>Sat, 20 May 2023 10:00:01 &#43;0800</lastBuildDate><atom:link href="https://ares0x.me/tags/react/" rel="self" type="application/rss+xml" /><item>
+    <title>前端项目脚手架</title>
+    <link>https://ares0x.me/drafts/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/</link>
+    <pubDate>Sat, 20 May 2023 10:00:01 &#43;0800</pubDate><author>
+        <name>ares0x</name>
+    </author><guid>https://ares0x.me/drafts/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/</guid>
+    <description><![CDATA[技术栈 pnpm vite React TypeScript Tailwind CSS 详情 创建项目 1 2 3 4 5 6 # 使用 create-react-app 创建一个 typescript 格式的项目 pnpm create vite [project-name] --template react-ts cd [project-name] pnpm install pnpm run dev 项目的目录结构和页面展示如下图所示
+修改相对路径 在 tsconfig.json 中的 compilerOptions 下添加**&ldquo;baseUrl&rdquo;: &ldquo;./src&rdquo;,** ，tsconfig.json 为 1 2 3 4 5 6 { &#34;compilerOptions&#34;: { &#34;baseUrl&#34;: &#34;./src&#34;, # 添加的路径 &#34;target&#34;: &#34;es5&#34;, # ... } 添加代码格式化工具 参考prettier官方文档 1 2 3 4 5 6 # 下载依赖 yarn add --dev --exact prettier # 创建配置 echo {}&gt; .]]></description>
+</item></channel>
+</rss>
