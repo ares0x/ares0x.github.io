@@ -13,11 +13,13 @@
 <meta property="og:url" content="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-03T23:00:01+08:00" />
 <meta property="article:modified_time" content="2023-02-03T23:00:01+08:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="gin 框架 - 路由"/>
 <meta name="twitter:description" content="简介路由是指当客户端请求达到后端服务器后，根据请求的 HTTP 请求方法和 URL，找到对应的处理函数进行处理的过程。路由由 HTTP 请求方法，URL 和请求处理器组成。HTTP 请求方法指 HTTP 协议中定义的请求类型，常见的包括 GET、POST、PUT、DELETE 等。URL 指请求的资源在服务器上的路径，通常是由一个或多个单词或数字组成，在一定规则约束下可带上特定字符，例如斜杠、短横线等。请求处理器是指针对某一请求的响应处理函数。
 基本使用 基本路由 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import &#34;github.com/gin-gonic/gin&#34; func main() { g := gin.Default() g.Handle(&#34;GET&#34;, &#34;/hello&#34;, func(c *gin.Context) { c.JSON(200, gin.H{ &#34;message&#34;: &#34;Hello World!&#34;, }) }) g.Run(&#34;:8080&#34;) } 使用 g.Handle() 方法可以定义针对特定请求方法的路由。Handle() 方法的第一个参数是 HTTP 请求方法，第二个参数是 URL 路径，第三个参数是请求处理器函数。在上面的例子中，我们定义了一个针对 HTTP GET 方法、URL 路径为 /hello 的路由。当用户请求该路径时，路由器会调用”请求处理器函数”返回相应的 JSON 信息。
 除了上述方法外，我们还可以使用GET()、POST()、DELETE()等快捷方法定义路由。比如："/>
+<meta name="twitter:site" content="@ares0x00"/>
 <meta name="application-name" content="ares0x&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
 
@@ -566,7 +568,7 @@
 </article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.119.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.120.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
