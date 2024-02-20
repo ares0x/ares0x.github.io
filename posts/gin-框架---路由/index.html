@@ -10,7 +10,7 @@
 基本使用 基本路由 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import &#34;github.com/gin-gonic/gin&#34; func main() { g := gin.Default() g.Handle(&#34;GET&#34;, &#34;/hello&#34;, func(c *gin.Context) { c.JSON(200, gin.H{ &#34;message&#34;: &#34;Hello World!&#34;, }) }) g.Run(&#34;:8080&#34;) } 使用 g.Handle() 方法可以定义针对特定请求方法的路由。Handle() 方法的第一个参数是 HTTP 请求方法，第二个参数是 URL 路径，第三个参数是请求处理器函数。在上面的例子中，我们定义了一个针对 HTTP GET 方法、URL 路径为 /hello 的路由。当用户请求该路径时，路由器会调用”请求处理器函数”返回相应的 JSON 信息。
 除了上述方法外，我们还可以使用GET()、POST()、DELETE()等快捷方法定义路由。比如：" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-03T23:00:01+08:00" />
 <meta property="article:modified_time" content="2023-02-03T23:00:01+08:00" />
 
@@ -24,7 +24,7 @@
 
 <meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/" /><link rel="prev" href="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E7%AE%80%E8%BF%B0/" /><link rel="next" href="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1/" /><link rel="prev" href="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E7%AE%80%E8%BF%B0/" /><link rel="next" href="https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB---%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -34,9 +34,9 @@
         "inLanguage": "zh-cn",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/ares0x.me\/posts\/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1\/"
+            "@id": "https:\/\/ares0x.me\/posts\/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1\/"
         },"genre": "posts","keywords": "Go, gin, web框架","wordcount":  633 ,
-        "url": "https:\/\/ares0x.me\/posts\/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1\/","datePublished": "2023-02-03T23:00:01+08:00","dateModified": "2023-02-03T23:00:01+08:00","publisher": {
+        "url": "https:\/\/ares0x.me\/posts\/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1\/","datePublished": "2023-02-03T23:00:01+08:00","dateModified": "2023-02-03T23:00:01+08:00","publisher": {
             "@type": "Organization",
             "name": "ares0x"},"author": {
                 "@type": "Person",
@@ -130,7 +130,7 @@
             <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "false")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">gin 框架 - 路由</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/gin/"><i class="far fa-folder fa-fw"></i>gin</a></span></div>
+                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/gin/"><i class="far fa-folder fa-fw"></i>Gin</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-02-03">2023-02-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-02-03">2023-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;633 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="true">
@@ -546,28 +546,28 @@
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
-            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
                     </span></div>
             <div class="post-info-share">
-                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/" data-title="gin 框架 - 路由" data-via="ares0x00" data-hashtags="Go,gin,web框架"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Linkedin" data-sharer="linkedin" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" title="Share on Reddit" data-sharer="reddit" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/"><i class="fab fa-reddit fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6-%E8%B7%AF%E7%94%B1/" data-title="gin 框架 - 路由"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1/" data-title="gin 框架 - 路由" data-via="ares0x00" data-hashtags="Go,gin,web框架"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Linkedin" data-sharer="linkedin" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1/"><i class="fab fa-linkedin fa-fw"></i></a><a href="#" title="Share on Reddit" data-sharer="reddit" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1/"><i class="fab fa-reddit fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E8%B7%AF%E7%94%B1/" data-title="gin 框架 - 路由"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/gin/">gin</a>,&nbsp;<a href="/tags/web%E6%A1%86%E6%9E%B6/">web框架</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/gin/">Gin</a>,&nbsp;<a href="/tags/web%E6%A1%86%E6%9E%B6/">Web框架</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/gin-%E6%A1%86%E6%9E%B6-%E7%AE%80%E8%BF%B0/" class="prev" rel="prev" title="gin 框架 - 简述"><i class="fas fa-angle-left fa-fw"></i>gin 框架 - 简述</a>
-            <a href="/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="next" rel="next" title="Go 源码阅读 - 环境配置">Go 源码阅读 - 环境配置<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/gin-%E6%A1%86%E6%9E%B6---%E7%AE%80%E8%BF%B0/" class="prev" rel="prev" title="gin 框架 - 简述"><i class="fas fa-angle-left fa-fw"></i>gin 框架 - 简述</a>
+            <a href="/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB---%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="next" rel="next" title="Go 源码阅读 - 环境配置">Go 源码阅读 - 环境配置<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.122.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.123.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
