@@ -5,19 +5,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>gin 框架 - 简述 - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="gin 框架 - 简述" />
-<meta property="og:description" content="gin 框架是一个使用Go语言编写的 web 框架，拥有很高的性能和可扩展性，在建立 Restful API 服务的时候非常方便。其中 gin 框架的路由功能非常重要，是实现所有请求分发的核心模块，可以用来定义请求的 URL 和 HTTP 方法，接受客户端请求并返回响应。 我会在后续一系列文章介绍 gin 框架的使用和原理。
+    <title>gin 框架 - 简述 - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:url" content="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E7%AE%80%E8%BF%B0/">
+  <meta property="og:site_name" content="ares0x&#39;s blog">
+  <meta property="og:title" content="gin 框架 - 简述">
+  <meta property="og:description" content="gin 框架是一个使用Go语言编写的 web 框架，拥有很高的性能和可扩展性，在建立 Restful API 服务的时候非常方便。其中 gin 框架的路由功能非常重要，是实现所有请求分发的核心模块，可以用来定义请求的 URL 和 HTTP 方法，接受客户端请求并返回响应。 我会在后续一系列文章介绍 gin 框架的使用和原理。
 gin 文章目录：
-gin 路由 " />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ares0x.me/posts/gin-%E6%A1%86%E6%9E%B6---%E7%AE%80%E8%BF%B0/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-02-02T11:31:01+08:00" />
-<meta property="article:modified_time" content="2023-02-02T11:31:01+08:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="gin 框架 - 简述"/>
+gin 路由 ">
+  <meta property="og:locale" content="zh-cn">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-02-02T11:31:01+08:00">
+    <meta property="article:modified_time" content="2023-02-02T11:31:01+08:00">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Gin">
+    <meta property="article:tag" content="Web框架">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="gin 框架 - 简述">
 <meta name="twitter:description" content="gin 框架是一个使用Go语言编写的 web 框架，拥有很高的性能和可扩展性，在建立 Restful API 服务的时候非常方便。其中 gin 框架的路由功能非常重要，是实现所有请求分发的核心模块，可以用来定义请求的 URL 和 HTTP 方法，接受客户端请求并返回响应。 我会在后续一系列文章介绍 gin 框架的使用和原理。
 gin 文章目录：
-gin 路由 "/>
-      <meta name="twitter:site" content="@ares0x00"/>
+gin 路由 ">
+      <meta name="twitter:site" content="@ares0x00">
 <meta name="application-name" content="ares0x&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
 
@@ -184,7 +190,7 @@ gin 路由 "/>
 </article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.124.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.125.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">

@@ -5,23 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>Mac下安装minikube - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:title" content="Mac下安装minikube" />
-<meta property="og:description" content="说明： 运行环境：MBP M1
+    <title>Mac下安装minikube - ares0x&#39;s blog</title><meta name="Description" content=""><meta property="og:url" content="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/">
+  <meta property="og:site_name" content="ares0x&#39;s blog">
+  <meta property="og:title" content="Mac下安装minikube">
+  <meta property="og:description" content="说明： 运行环境：MBP M1
 minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。
 安装 kubectlkubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 kubectl 安装文档 进行安装。安装文档中提供了三种安装方式，任选一种即可。
-使用kubectl version &ndash;client命令校验安装结果
-1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&#34;1&#34;, Minor:&#34;27&#34;, GitVersion:&#34;v1.27.1&#34;, GitCommit:&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2023-04-14T13:21:19Z&#34;, GoVersion:&#34;go1.20.3&#34;, Compiler:&#34;gc&#34;, Platform:&#34;darwin/arm64&#34;} Kustomize Version: v5." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-04-01T23:00:01+08:00" />
-<meta property="article:modified_time" content="2023-04-01T23:00:01+08:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mac下安装minikube"/>
+使用kubectl version &amp;ndash;client命令校验安装结果
+1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&amp;#34;1&amp;#34;, Minor:&amp;#34;27&amp;#34;, GitVersion:&amp;#34;v1.27.1&amp;#34;, GitCommit:&amp;#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&amp;#34;, GitTreeState:&amp;#34;clean&amp;#34;, BuildDate:&amp;#34;2023-04-14T13:21:19Z&amp;#34;, GoVersion:&amp;#34;go1.20.3&amp;#34;, Compiler:&amp;#34;gc&amp;#34;, Platform:&amp;#34;darwin/arm64&amp;#34;} Kustomize Version: v5.">
+  <meta property="og:locale" content="zh-cn">
+  <meta property="og:type" content="article">
+  <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-04-01T23:00:01+08:00">
+    <meta property="article:modified_time" content="2023-04-01T23:00:01+08:00">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="Go">
+    <meta property="article:tag" content="Kubernetes">
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Mac下安装minikube">
 <meta name="twitter:description" content="说明： 运行环境：MBP M1
 minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。
 安装 kubectlkubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 kubectl 安装文档 进行安装。安装文档中提供了三种安装方式，任选一种即可。
 使用kubectl version &ndash;client命令校验安装结果
-1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&#34;1&#34;, Minor:&#34;27&#34;, GitVersion:&#34;v1.27.1&#34;, GitCommit:&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2023-04-14T13:21:19Z&#34;, GoVersion:&#34;go1.20.3&#34;, Compiler:&#34;gc&#34;, Platform:&#34;darwin/arm64&#34;} Kustomize Version: v5."/>
-      <meta name="twitter:site" content="@ares0x00"/>
+1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&#34;1&#34;, Minor:&#34;27&#34;, GitVersion:&#34;v1.27.1&#34;, GitCommit:&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2023-04-14T13:21:19Z&#34;, GoVersion:&#34;go1.20.3&#34;, Compiler:&#34;gc&#34;, Platform:&#34;darwin/arm64&#34;} Kustomize Version: v5.">
+      <meta name="twitter:site" content="@ares0x00">
 <meta name="application-name" content="ares0x&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
 
@@ -310,7 +316,7 @@ minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本�
 </article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.124.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.125.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
