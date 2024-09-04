@@ -10,7 +10,25 @@
     <pubDate>Thu, 02 Feb 2023 11:31:01 &#43;0800</pubDate><author>
         <name>ares0x</name>
     </author><guid>https://ares0x.me/drafts/%E4%BD%BF%E7%94%A8-tcpdum-%E6%8A%93%E5%8C%85/</guid>
-    <description><![CDATA[在开发过程中，难免会碰到一些需要解决的 bug，除了编程语言提供的 profiling，我们也需要学会使用常用的排查工具来进行网络分析。
-常用功能 指定网卡 指定抓包数量 保存为特定文件 去除时间显示 不解析ip地址和端口号 1 2 tcpdump -nn 完整示例 抓包 Nginx 抓包 Go 程序]]></description>
+    <description><![CDATA[<p>在开发过程中，难免会碰到一些需要解决的 bug，除了编程语言提供的 profiling，我们也需要学会使用常用的排查工具来进行网络分析。</p>
+<h2 id="常用功能" class="headerLink">
+    <a href="#%e5%b8%b8%e7%94%a8%e5%8a%9f%e8%83%bd" class="header-mark"></a>常用功能</h2><h3 id="指定网卡" class="headerLink">
+    <a href="#%e6%8c%87%e5%ae%9a%e7%bd%91%e5%8d%a1" class="header-mark"></a>指定网卡</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"></code></pre></td></tr></table>
+</div>
+</div><h3 id="指定抓包数量" class="headerLink">
+    <a href="#%e6%8c%87%e5%ae%9a%e6%8a%93%e5%8c%85%e6%95%b0%e9%87%8f" class="header-mark"></a>指定抓包数量</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"></code></pre></td></tr></table>
+</div>
+</div><h3 id="保存为特定文件" class="headerLink">
+    <a href="#%e4%bf%9d%e5%ad%98%e4%b8%ba%e7%89%b9%e5%ae%9a%e6%96%87%e4%bb%b6" class="header-mark"></a>保存为特定文件</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pr]]></description>
 </item></channel>
 </rss>

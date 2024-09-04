@@ -10,7 +10,20 @@
     <pubDate>Mon, 06 Feb 2023 22:29:00 &#43;0800</pubDate><author>
         <name>ares0x</name>
     </author><guid>https://ares0x.me/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB---%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
-    <description><![CDATA[该系列是我在搭配 Go 语言设计与实现 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。 环境说明 机器配置：Apple M1 Pro Go 版本： go1.16.5 编辑器：Goland, VIM, VS Code GOPATH：/Users/ares/workspace/go 建立目录在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示 下载go源码在 https://go.dev/dl/ 中下载与本地 go version 版本一致的源码，注意（Mac M系列芯片的要选择 Arch 为ARM64 的）
-1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) .]]></description>
+    <description><![CDATA[<ul>
+<li>该系列是我在搭配 <a href="https://draveness.me/golang/" target="_blank" rel="noopener noreferrer">Go 语言设计与实现</a> 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。</li>
+</ul>
+<h2 id="环境说明" class="headerLink">
+    <a href="#%e7%8e%af%e5%a2%83%e8%af%b4%e6%98%8e" class="header-mark"></a>环境说明</h2><ul>
+<li>机器配置：Apple M1 Pro</li>
+<li>Go 版本： go1.16.5</li>
+<li>编辑器：Goland, VIM, VS Code</li>
+<li>GOPATH：/Users/ares/workspace/go</li>
+</ul>
+<h2 id="建立目录" class="headerLink">
+    <a href="#%e5%bb%ba%e7%ab%8b%e7%9b%ae%e5%bd%95" class="header-mark"></a>建立目录</h2><p>在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示
+<a class="lightgallery" href="/images/tree.png" title="version 目录" data-thumbnail="/images/tree.png">
+        
+    </a></p>]]></description>
 </item></channel>
 </rss>

@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 
 <head>
-	<meta name="generator" content="Hugo 0.133.1">
+	<meta name="generator" content="Hugo 0.134.0">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
@@ -128,55 +128,161 @@
         <a href="/posts/mac-%E4%B8%8B%E5%AE%89%E8%A3%85-chatglm-6b/">Mac下安装 chatglm-6b</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-12">2023-04-12</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/ai/"><i class="far fa-folder fa-fw"></i>AI</a></span></div><div class="content">环境：
-机器：mbp m1 pro python：Python 3.9.6 pip: pip 21.2.4 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9) 注意： 本次安装使用代理并启动了终端代理
-安装配置 git-lfs 1 2 3 4 # 安装 brew install git-lfs # 验证安装 git lfs install 下载代码 1 2 3 4 5 # 下载代码 git clone https://github.com/THUDM/ChatGLM-6B.git # 安装依赖 cd ChatGLM-6B &amp;&amp; pip3 install -r requirements.txt 下载并验证模型 1 2 3 4 5 6 7 # 下载模型 git clone https://huggingface.co/THUDM/chatglm-6b # 此过程会耗时一段时间，你可以去接杯水 # 进入模型所在目录 cd chatglm-6b # 验证模型 shasum -a 256 ice_text.</div><div class="post-footer">
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-12">2023-04-12</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/ai/"><i class="far fa-folder fa-fw"></i>AI</a></span></div><div class="content"><p>环境：</p>
+<ul>
+<li>机器：mbp m1 pro</li>
+<li>python：Python 3.9.6</li>
+<li>pip: pip 21.2.4 from /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/site-packages/pip (python 3.9)</li>
+</ul>
+<p>注意：
+本次安装使用代理并启动了终端代理</p>
+<h2 id="安装配置-git-lfs" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85%e9%85%8d%e7%bd%ae-git-lfs" class="header-mark"></a>安装配置 git-lfs</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl">brew install git-lfs
+</span></span><span class="line"><span class="cl"><span class="c1"># 验证安装</span>
+</span></span><span class="line"><span class="cl">git lfs install
+</span></span></code></pr</div><div class="post-footer">
         <a href="/posts/mac-%E4%B8%8B%E5%AE%89%E8%A3%85-chatglm-6b/">Read more...</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/llm/">LLM</a>,&nbsp;<a href="/tags/chatglm/">ChatGLM</a>,&nbsp;<a href="/tags/nlp/">NLP</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/">Mac下安装minikube</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div><div class="content">说明： 运行环境：MBP M1
-minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。
-安装 kubectlkubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 kubectl 安装文档 进行安装。安装文档中提供了三种安装方式，任选一种即可。
-使用kubectl version &ndash;client命令校验安装结果
-1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&#34;1&#34;, Minor:&#34;27&#34;, GitVersion:&#34;v1.27.1&#34;, GitCommit:&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2023-04-14T13:21:19Z&#34;, GoVersion:&#34;go1.20.3&#34;, Compiler:&#34;gc&#34;, Platform:&#34;darwin/arm64&#34;} Kustomize Version: v5.</div><div class="post-footer">
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div><div class="content"><p>说明：
+运行环境：MBP M1</p>
+<p>minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。</p>
+<h2 id="安装-kubectl" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85-kubectl" class="header-mark"></a>安装 kubectl</h2><p>kubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#install-kubectl-on-macos" target="_blank" rel="noopener noreferrer">kubectl 安装文档</a> 进行安装。安装文档中提供了三种安装方式，任选一种即可。</p>
+<p>使用<strong>kubectl version &ndash;client</strong>命令校验安装结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ➜ kubectl version --client
+</span></span><span class="line"><span class="cl">WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output<span class="o">=</span>yaml<span class="p">|</span>json to get the full version.
+</span></span><span class="line"><span class="cl">Client Version: version.Info<span class="o">{</span>Major:<span class="s2">&#34;1&#34;</span>, Minor:<span class="s2">&#34;27&#34;</span>, GitVersion:<span class="s2">&#34;v1.27.1&#34;</span>, GitCommit:<span class="s2">&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;</span>, GitTreeState:<span class="s2">&#34;clean&#34;</span>, BuildDate:<span class="s2">&#34;2023-04-14T13:21:19Z&#34;</span>, GoVersion:<span class="s2">&#34;go1.20.3&#34;</span>, Compiler:<span class="s2">&#34;gc&#34;</span>, Platform:<span class="s2">&#34;darwin/arm64&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Kustomize Version: v5.0.1
+</span></span></code></pr</div><div class="post-footer">
         <a href="/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/">Read more...</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/minikube%E9%83%A8%E7%BD%B2go%E9%A1%B9%E7%9B%AE/">minikube下部署go项目</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div><div class="content">注意 本文假设已启动 minikube，具体操作请参考Mac下安装minikube
-构建应用镜像 交互式 文件式 创建 Deployment 1 2 3 4 5 6 7 8 9 10 # 创建 Deployment kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080 # 查看 Deployment kubectl get deployments # 查看 Pod kubectl get pods # 查看集群事件 kubectl get events # 查看 kubectl 配置 kubectl config view 创建 service 1 2 3 kubectl expose deployment hello-node --type=LoadBalancer --port=8080 # 查看 service kubectl get services kubernetes 中的几个组件和概念pod: 是由一个或多个为了管理和联网而绑定在一起的容器构成的组 service： deployment：</div><div class="post-footer">
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div><div class="content"><p>注意
+本文假设已启动 minikube，具体操作请参考<a href="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/" target="_blank" rel="noopener noreferrer">Mac下安装minikube</a></p>
+<h2 id="构建应用镜像" class="headerLink">
+    <a href="#%e6%9e%84%e5%bb%ba%e5%ba%94%e7%94%a8%e9%95%9c%e5%83%8f" class="header-mark"></a>构建应用镜像</h2><h3 id="交互式" class="headerLink">
+    <a href="#%e4%ba%a4%e4%ba%92%e5%bc%8f" class="header-mark"></a>交互式</h3><h3 id="文件式" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e5%bc%8f" class="header-mark"></a>文件式</h3><h2 id="创建-deployment" class="headerLink">
+    <a href="#%e5%88%9b%e5%bb%ba-deployment" class="header-mark"></a>创建 Deployment</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pr</div><div class="post-footer">
         <a href="/posts/minikube%E9%83%A8%E7%BD%B2go%E9%A1%B9%E7%9B%AE/">Read more...</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/kubernetes/">Kubernetes</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">几个常用的网络工具</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>计算机网络</a></span></div><div class="content">Linux 下常用的网络工具本文将会介绍常用的四种网络工具：netstat、ss、tcpdump和wireshark。这些工具可以帮助我们快速了解网络连接情况、查找网络延迟、以及排查网络问题等。这些工具不仅有助于监控和管理现有网络设备，同时也是设计和实施新网络时十分重要的工具集。 在使用这些工具时，需要根据具体的使用场景选择不同工具进行操作。例如，当需要定位网络连接问题时，可以使用 netstat 和 ss 这两种常用的网络连接查询工具；当需要抓包并查看网络数据流时，可以使用 tcpdump 和 wireshark 这两种网络流量分析工具。这些工具的使用方法和技巧因工具而异，但是它们都可以帮助我们深入了解网络。
-netstatnetstat 是一种常用的网络工具，通常用于诊断网络连接问题和查看当前系统的网络连接状态。它可以显示当前系统的网络和协议统计信息，包括协议、本地地址、外部地址、连接状态等。在实际网络管理和故障排除工作中，Netstat 是一种非常有用的工具。下面是关于 netstat 的更详细的介绍和使用指南：
-1 2 3 4 5 6 # -a 显示所有套接字 # -t 表示显示 TCP 套接字 # -u 表示显示 UDP 套接字 # -l 表示只显示监听套接字 # -n 表示显示数字地址和端口(而不是名字) # -p 表示显示进程信息 当我们使用 netstat -tn 或者 netstat -un 时，会展示如下指标
-Proto：协议 Recv-Q：接收队列（缓冲） Send-Q：发送队列（缓冲） Local Address：本地地址和端口 Foreign Address：对端地址和端口 State：状态，通常情况下我们需要关注: LISTEN, ESTABLISHED, TIME_WAIT, CLOSE_WAIT 四种状态 示例 查找当前TCP连接中处于ESTABLISHED状态的连接，对于这些连接，如果它们的发送或接收数据的字节数大于0，则打印它们的信息 1 2 3 4 5 6 7 8 9 [root@VM-8-7-centos ~]# netstat -nt | xargs -L 1 | grep &#34;ESTABLISHED&#34; | awk &#39;{if ($2&gt;0 || $3&gt;0) print $0}&#39; Proto Recv-Q Send-Q Local Address Foreign Address State tcp 0 0 10.</div><div class="post-footer">
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>计算机网络</a></span></div><div class="content"><h2 id="linux-下常用的网络工具" class="headerLink">
+    <a href="#linux-%e4%b8%8b%e5%b8%b8%e7%94%a8%e7%9a%84%e7%bd%91%e7%bb%9c%e5%b7%a5%e5%85%b7" class="header-mark"></a>Linux 下常用的网络工具</h2><p>本文将会介绍常用的四种网络工具：netstat、ss、tcpdump和wireshark。这些工具可以帮助我们快速了解网络连接情况、查找网络延迟、以及排查网络问题等。这些工具不仅有助于监控和管理现有网络设备，同时也是设计和实施新网络时十分重要的工具集。
+在使用这些工具时，需要根据具体的使用场景选择不同工具进行操作。例如，当需要定位网络连接问题时，可以使用 netstat 和 ss 这两种常用的网络连接查询工具；当需要抓包并查看网络数据流时，可以使用 tcpdump 和 wireshark 这两种网络流量分析工具。这些工具的使用方法和技巧因工具而异，但是它们都可以帮助我们深入了解网络。</p>
+<h3 id="netstat" class="headerLink">
+    <a href="#netstat" class="header-mark"></a>netstat</h3><p>netstat 是一种常用的网络工具，通常用于诊断网络连接问题和查看当前系统的网络连接状态。它可以显示当前系统的网络和协议统计信息，包括协议、本地地址、外部地址、连接状态等。在实际网络管理和故障排除工作中，Netstat 是一种非常有用的工具。下面是关于 netstat 的更详细的介绍和使用指南：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># -a 显示所有套接字</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -t 表示显示 TCP 套接字</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -u 表示显示 UDP 套接字</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -l 表示只显示监听套接字</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -n 表示显示数字地址和端口(而不是名字)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -p 表示显示进程信息</span>
+</span></span></code></pr</div><div class="post-footer">
         <a href="/posts/%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">Read more...</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tcp/">TCP</a>,&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>,&nbsp;<a href="/tags/linux/">Linux</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/docker-%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/">Docker简易操作</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div><div class="content">Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。
-为什么要用 Docker 更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）； 更快速的启动时间； 一致的运行环境； 持续交付和部署； 更轻松地迁移，维护和部署 Docker 常用操作 容器操作 启动 1 2 3 4 5 docker run # -it 交互 # -d 后台运行,如果不加 -d，从容器退出后该容器会停止运行 # -p 端口映射 # -v 硬盘挂载 eg:
-1 docker run centos -d # 启动一个 centos 容器，并进入容器内部 停止容器 1 docker stop xxx 启动已停止容器 1 docker start xxx 查看容器进程 1 2 docker ps # -a 查看所有容器（包括已停止的容器） 举例</div><div class="post-footer">
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-04-01">2023-04-01</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/"><i class="far fa-folder fa-fw"></i>云原生</a></span></div><div class="content"><p>Docker 是目前最流行的轻量级容器化解决方案，它可以提供一致的运行环境，并解决各种运维问题。如何在 Docker 中部署 Go 语言项目，已成为了很多人关心的问题。本文介绍如何在 Docker 中部署 Go 语言项目，包括如何写 Dockerfile 和构建镜像的过程，以及使用 Docker 部署 Go 语言项目可能存在的问题和优化方法。</p>
+<h2 id="为什么要用-docker" class="headerLink">
+    <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e7%94%a8-docker" class="header-mark"></a>为什么要用 Docker</h2><ol>
+<li>更高效地利用资源。虚拟化技术需要虚拟化一个操作系统，容器技术基于 namesapce，cgroup，不需要虚拟化更多的东西（Guest OS 等等）；</li>
+<li>更快速的启动时间；</li>
+<li>一致的运行环境；</li>
+<li>持续交付和部署；</li>
+<li>更轻松地迁移，维护和部署</li>
+</ol>
+<h2 id="docker-常用操作" class="headerLink">
+    <a href="#docker-%e5%b8%b8%e7%94%a8%e6%93%8d%e4%bd%9c" class="header-mark"></a>Docker 常用操作</h2><h3 id="容器操作" class="headerLink">
+    <a href="#%e5%ae%b9%e5%99%a8%e6%93%8d%e4%bd%9c" class="header-mark"></a>容器操作</h3><ul>
+<li>启动</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pr</div><div class="post-footer">
         <a href="/posts/docker-%E7%AE%80%E6%98%93%E6%93%8D%E4%BD%9C/">Read more...</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a>,&nbsp;<a href="/tags/go/">Go</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB---%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Go 源码阅读 - 环境配置</a>
     </h1><div class="post-meta">
         <span class="post-author"><i class="author fas fa-user-circle fa-fw"></i><a href="/" title="Author" rel=" author" class="author">ares0x</a>
-        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-06">2023-02-06</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E6%BA%90%E7%A0%81/"><i class="far fa-folder fa-fw"></i>源码</a></span></div><div class="content">该系列是我在搭配 Go 语言设计与实现 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。 环境说明 机器配置：Apple M1 Pro Go 版本： go1.16.5 编辑器：Goland, VIM, VS Code GOPATH：/Users/ares/workspace/go 建立目录在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示 下载go源码在 https://go.dev/dl/ 中下载与本地 go version 版本一致的源码，注意（Mac M系列芯片的要选择 Arch 为ARM64 的）
-1 tar -zxvf go1.16.5.darwin-arm64.tar.gz -C $GOPATH/version 配置 Goland使用 Goland 打开下载的源码，配置 GOROOT 为本地 go env 下的 go 版本（编译过程中要使用其中的一些工具） 建立一个对应 go version 的 practice 项目，将项目的 GOROOT 配置为源码所在路径，该项目用于测试修改后的源码 编译 Go 源码 1 2 cd $GOPATH/version/go1.16.5/src (GOPATH 替换为本地 GOPATH所在路径) .</div><div class="post-footer">
+        </span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-06">2023-02-06</time></span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/categories/%E6%BA%90%E7%A0%81/"><i class="far fa-folder fa-fw"></i>源码</a></span></div><div class="content"><ul>
+<li>该系列是我在搭配 <a href="https://draveness.me/golang/" target="_blank" rel="noopener noreferrer">Go 语言设计与实现</a> 阅读 Go 源码时的笔记，侧重于记录，文笔可能比较潦草。</li>
+</ul>
+<h2 id="环境说明" class="headerLink">
+    <a href="#%e7%8e%af%e5%a2%83%e8%af%b4%e6%98%8e" class="header-mark"></a>环境说明</h2><ul>
+<li>机器配置：Apple M1 Pro</li>
+<li>Go 版本： go1.16.5</li>
+<li>编辑器：Goland, VIM, VS Code</li>
+<li>GOPATH：/Users/ares/workspace/go</li>
+</ul>
+<h2 id="建立目录" class="headerLink">
+    <a href="#%e5%bb%ba%e7%ab%8b%e7%9b%ae%e5%bd%95" class="header-mark"></a>建立目录</h2><p>在 $GOPATH 下建立一个目录，用于放置下载的源码以及对应的测试代码。我建立了一个名为 version 的目录，在该目录下存放 go1.16.5 版本源码以及测试项目，如图所示
+<a class="lightgallery" href="/images/tree.png" title="version 目录" data-thumbnail="/images/tree.png">
+        <img
+            
+            loading="lazy"
+            src="/images/tree.png"
+            srcset="/images/tree.png, /images/tree.png 1.5x, /images/tree.png 2x"
+            sizes="auto"
+            alt="/images/tree.png">
+    </a></p></div><div class="post-footer">
         <a href="/posts/go-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB---%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">Read more...</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">源码阅读</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
@@ -190,7 +296,7 @@ Proto：协议 Recv-Q：接收队列（缓冲） Send-Q：发送队列（缓冲�
                 </li></ul></div></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.133.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.134.0">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">

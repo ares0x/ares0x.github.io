@@ -10,18 +10,49 @@
     <pubDate>Sat, 01 Apr 2023 23:00:01 &#43;0800</pubDate><author>
         <name>ares0x</name>
     </author><guid>https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/</guid>
-    <description><![CDATA[说明： 运行环境：MBP M1
-minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。
-安装 kubectlkubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 kubectl 安装文档 进行安装。安装文档中提供了三种安装方式，任选一种即可。
-使用kubectl version &ndash;client命令校验安装结果
-1 2 3 4 $ ➜ kubectl version --client WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short. Use --output=yaml|json to get the full version. Client Version: version.Info{Major:&#34;1&#34;, Minor:&#34;27&#34;, GitVersion:&#34;v1.27.1&#34;, GitCommit:&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;, GitTreeState:&#34;clean&#34;, BuildDate:&#34;2023-04-14T13:21:19Z&#34;, GoVersion:&#34;go1.20.3&#34;, Compiler:&#34;gc&#34;, Platform:&#34;darwin/arm64&#34;} Kustomize Version: v5.]]></description>
+    <description><![CDATA[<p>说明：
+运行环境：MBP M1</p>
+<p>minikube 是一种可以在本地轻松运行 Kubernetes minikube 在笔记本电脑上的虚拟机或 Docker 中运行单节 Kubernetes ，用于学习和日常开发。为此，记录一下 minikube 的安装过程。</p>
+<h2 id="安装-kubectl" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85-kubectl" class="header-mark"></a>安装 kubectl</h2><p>kubectl 是 kubernetes 中用于集群管理的 CLI 工具。安装可参考 <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#install-kubectl-on-macos" target="_blank" rel="noopener noreferrer">kubectl 安装文档</a> 进行安装。安装文档中提供了三种安装方式，任选一种即可。</p>
+<p>使用<strong>kubectl version &ndash;client</strong>命令校验安装结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ➜ kubectl version --client
+</span></span><span class="line"><span class="cl">WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output<span class="o">=</span>yaml<span class="p">|</span>json to get the full version.
+</span></span><span class="line"><span class="cl">Client Version: version.Info<span class="o">{</span>Major:<span class="s2">&#34;1&#34;</span>, Minor:<span class="s2">&#34;27&#34;</span>, GitVersion:<span class="s2">&#34;v1.27.1&#34;</span>, GitCommit:<span class="s2">&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;</span>, GitTreeState:<span class="s2">&#34;clean&#34;</span>, BuildDate:<span class="s2">&#34;2023-04-14T13:21:19Z&#34;</span>, GoVersion:<span class="s2">&#34;go1.20.3&#34;</span>, Compiler:<span class="s2">&#34;gc&#34;</span>, Platform:<span class="s2">&#34;darwin/arm64&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Kustomize Version: v5.0.1
+</span></span></code></pr]]></description>
 </item><item>
     <title>minikube下部署go项目</title>
     <link>https://ares0x.me/posts/minikube%E9%83%A8%E7%BD%B2go%E9%A1%B9%E7%9B%AE/</link>
     <pubDate>Sat, 01 Apr 2023 23:00:01 &#43;0800</pubDate><author>
         <name>ares0x</name>
     </author><guid>https://ares0x.me/posts/minikube%E9%83%A8%E7%BD%B2go%E9%A1%B9%E7%9B%AE/</guid>
-    <description><![CDATA[注意 本文假设已启动 minikube，具体操作请参考Mac下安装minikube
-构建应用镜像 交互式 文件式 创建 Deployment 1 2 3 4 5 6 7 8 9 10 # 创建 Deployment kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080 # 查看 Deployment kubectl get deployments # 查看 Pod kubectl get pods # 查看集群事件 kubectl get events # 查看 kubectl 配置 kubectl config view 创建 service 1 2 3 kubectl expose deployment hello-node --type=LoadBalancer --port=8080 # 查看 service kubectl get services kubernetes 中的几个组件和概念pod: 是由一个或多个为了管理和联网而绑定在一起的容器构成的组 service： deployment：]]></description>
+    <description><![CDATA[<p>注意
+本文假设已启动 minikube，具体操作请参考<a href="https://ares0x.me/posts/mac%E4%B8%8B%E5%AE%89%E8%A3%85minikube/" target="_blank" rel="noopener noreferrer">Mac下安装minikube</a></p>
+<h2 id="构建应用镜像" class="headerLink">
+    <a href="#%e6%9e%84%e5%bb%ba%e5%ba%94%e7%94%a8%e9%95%9c%e5%83%8f" class="header-mark"></a>构建应用镜像</h2><h3 id="交互式" class="headerLink">
+    <a href="#%e4%ba%a4%e4%ba%92%e5%bc%8f" class="header-mark"></a>交互式</h3><h3 id="文件式" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e5%bc%8f" class="header-mark"></a>文件式</h3><h2 id="创建-deployment" class="headerLink">
+    <a href="#%e5%88%9b%e5%bb%ba-deployment" class="header-mark"></a>创建 Deployment</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pr]]></description>
 </item></channel>
 </rss>
