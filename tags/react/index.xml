@@ -38,6 +38,127 @@
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="o">[</span>project-name<span class="o">]</span> 
 </span></span><span class="line"><span class="cl">pnpm install
 </span></span><span class="line"><span class="cl">pnpm run dev
-</span></span></code></pr]]></description>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>项目的目录结构和页面展示如下图所示</p>
+<ol start="2">
+<li>修改相对路径
+在 tsconfig.json 中的 compilerOptions 下添加**&ldquo;baseUrl&rdquo;: &ldquo;./src&rdquo;,** ，tsconfig.json 为</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;compilerOptions&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;baseUrl&#34;</span>: <span class="s2">&#34;./src&#34;</span>, <span class="c1"># 添加的路径</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;target&#34;</span>: <span class="s2">&#34;es5&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="c1"># ... </span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>   
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>添加代码格式化工具
+参考<a href="https://prettier.io/docs/en/install.html" target="_blank" rel="noopener noreferrer">prettier官方文档</a></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载依赖</span>
+</span></span><span class="line"><span class="cl">yarn add --dev --exact prettier
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建配置</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">{}</span>&gt; .prettierrc.json
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建 ignore</span>
+</span></span><span class="line"><span class="cl">touch .prettierignore
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>添加 precommit-hook
+参考<a href="https://prettier.io/docs/en/precommit.html" target="_blank" rel="noopener noreferrer">precommit</a></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 添加 precommit 依赖</span>
+</span></span><span class="line"><span class="cl">npx mrm@2 lint-staged
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>lint</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装 eslint-config-prettier 依赖</span>
+</span></span><span class="line"><span class="cl">yarn add  eslint-config-prettier -D
+</span></span><span class="line"><span class="cl"><span class="c1"># package.json 的 eslintConfig.extends 中添加</span>
+</span></span><span class="line"><span class="cl"> <span class="s2">&#34;prettier&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>规范 commit
+参考<a href="https://github.com/conventional-changelog/commitlint" target="_blank" rel="noopener noreferrer">commitlint README</a></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装依赖</span>
+</span></span><span class="line"><span class="cl">yarn add @commitlint/<span class="o">{</span>config-conventional,cli<span class="o">}</span>
+</span></span><span class="line"><span class="cl">yarn add @commitlint/config-conventional @commitlint/cli
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建commitlint.config.js</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;module.exports = {extends: [&#39;@commitlint/config-conventional&#39;]}&#34;</span> &gt; commitlint.config.js
+</span></span><span class="line"><span class="cl"><span class="c1"># 在package.json中添加</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;commit-msg&#34;</span>: <span class="s2">&#34;commitlint -E HUSKY_GIT_PARAMS&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>引入 tailwind</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pnpm install -D tailwindcss postcss autoprefixer
+</span></span><span class="line"><span class="cl">npx tailwindcss init -p
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建 tailwind.config.js 文件</span>
+</span></span><span class="line"><span class="cl">touch tailwind.config.js
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>并在 tailwind.config.js 中写入</p>]]></description>
 </item></channel>
 </rss>

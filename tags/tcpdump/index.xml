@@ -29,6 +29,31 @@
 </div><h3 id="保存为特定文件" class="headerLink">
     <a href="#%e4%bf%9d%e5%ad%98%e4%b8%ba%e7%89%b9%e5%ae%9a%e6%96%87%e4%bb%b6" class="header-mark"></a>保存为特定文件</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pr]]></description>
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"></code></pre></td></tr></table>
+</div>
+</div><h3 id="去除时间显示" class="headerLink">
+    <a href="#%e5%8e%bb%e9%99%a4%e6%97%b6%e9%97%b4%e6%98%be%e7%a4%ba" class="header-mark"></a>去除时间显示</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"></code></pre></td></tr></table>
+</div>
+</div><h3 id="不解析ip地址和端口号" class="headerLink">
+    <a href="#%e4%b8%8d%e8%a7%a3%e6%9e%90ip%e5%9c%b0%e5%9d%80%e5%92%8c%e7%ab%af%e5%8f%a3%e5%8f%b7" class="header-mark"></a>不解析ip地址和端口号</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tcpdump -nn
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="完整示例" class="headerLink">
+    <a href="#%e5%ae%8c%e6%95%b4%e7%a4%ba%e4%be%8b" class="header-mark"></a>完整示例</h2><h3 id="抓包-nginx" class="headerLink">
+    <a href="#%e6%8a%93%e5%8c%85-nginx" class="header-mark"></a>抓包 Nginx</h3><h3 id="抓包-go-程序" class="headerLink">
+    <a href="#%e6%8a%93%e5%8c%85-go-%e7%a8%8b%e5%ba%8f" class="header-mark"></a>抓包 Go 程序</h3>]]></description>
 </item></channel>
 </rss>

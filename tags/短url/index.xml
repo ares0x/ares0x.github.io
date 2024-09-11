@@ -51,6 +51,44 @@
 </span><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
-</span></code></pr]]></description>
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//  Encode 生成短链接并存储
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">Encode</span><span class="p">(</span><span class="nx">originalUrl</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">uuid</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">()</span> <span class="c1">// uuid 可以通过多种方式生成，如，redis incr，独立的发号器等
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">var</span> <span class="nx">shortUrl</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">uuid</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">shortUrl</span> <span class="p">=</span> <span class="nb">string</span><span class="p">(</span><span class="nx">constvar</span><span class="p">.</span><span class="nx">Seed</span><span class="p">[</span><span class="nx">uuid</span><span class="o">%</span><span class="mi">62</span><span class="p">])</span> <span class="o">+</span> <span class="nx">shortUrl</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">uuid</span> <span class="p">=</span> <span class="nx">uuid</span> <span class="o">/</span> <span class="mi">62</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// TODO 将 uuid，originalUrl（原始 url）和 shortUrl 组成的三元组存储
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">shortUrl</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Decode 根据短链接获取原始链接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">Decode</span><span class="p">(</span><span class="nx">shortUrl</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 根据短链接获取唯一id
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">var</span> <span class="nx">id</span> <span class="kt">int64</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">n</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">shortUrl</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pos</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">IndexByte</span><span class="p">(</span><span class="nx">constvar</span><span class="p">.</span><span class="nx">Seed</span><span class="p">,</span> <span class="nx">shortUrl</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">id</span> <span class="p">=</span> <span class="nx">id</span><span class="o">*</span><span class="mi">62</span> <span class="o">+</span> <span class="nb">int64</span><span class="p">(</span><span class="nx">pos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">urlQuery</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">url</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">urlQuery</span><span class="p">.</span><span class="nf">GetById</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">url</span><span class="p">.</span><span class="nx">OriginalUrl</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="优化" class="headerLink">
+    <a href="#%e4%bc%98%e5%8c%96" class="header-mark"></a>优化</h2><ul>
+<li>uuid 的生成方式。在分布式环境下建议通过第三方组件来生成递增的唯一 id，以保证生成的 shortUrl 不重复</li>
+<li>可以通过 redis 做缓存来加速访问</li>
+</ul>
+<p>代码地址：
+<a href="https://github.com/ares0x/system-design/tree/main/short-url" target="_blank" rel="noopener noreferrer">https://github.com/ares0x/system-design/tree/main/short-url</a></p>]]></description>
 </item></channel>
 </rss>

@@ -28,7 +28,10 @@
 </span></span><span class="line"><span class="cl">WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output<span class="o">=</span>yaml<span class="p">|</span>json to get the full version.
 </span></span><span class="line"><span class="cl">Client Version: version.Info<span class="o">{</span>Major:<span class="s2">&#34;1&#34;</span>, Minor:<span class="s2">&#34;27&#34;</span>, GitVersion:<span class="s2">&#34;v1.27.1&#34;</span>, GitCommit:<span class="s2">&#34;4c9411232e10168d7b050c49a1b59f6df9d7ea4b&#34;</span>, GitTreeState:<span class="s2">&#34;clean&#34;</span>, BuildDate:<span class="s2">&#34;2023-04-14T13:21:19Z&#34;</span>, GoVersion:<span class="s2">&#34;go1.20.3&#34;</span>, Compiler:<span class="s2">&#34;gc&#34;</span>, Platform:<span class="s2">&#34;darwin/arm64&#34;</span><span class="o">}</span>
 </span></span><span class="line"><span class="cl">Kustomize Version: v5.0.1
-</span></span></code></pr]]></description>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="安装-minikube" class="headerLink">
+    <a href="#%e5%ae%89%e8%a3%85-minikube" class="header-mark"></a>安装 minikube</h2><p>可以参考 <a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener noreferrer">minikube 安装文档</a> 进行安装。在该文档中选择与自己相同的系统来获取安装命令。我的机器是 Mac M1，所以选择</p>]]></description>
 </item><item>
     <title>minikube下部署go项目</title>
     <link>https://ares0x.me/posts/minikube%E9%83%A8%E7%BD%B2go%E9%A1%B9%E7%9B%AE/</link>
@@ -53,6 +56,36 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span></code></pr]]></description>
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 创建 Deployment</span>
+</span></span><span class="line"><span class="cl">kubectl create deployment hello-node --image<span class="o">=</span>registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看 Deployment</span>
+</span></span><span class="line"><span class="cl">kubectl get deployments
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看 Pod</span>
+</span></span><span class="line"><span class="cl">kubectl get pods
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看集群事件</span>
+</span></span><span class="line"><span class="cl">kubectl get events
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看 kubectl 配置</span>
+</span></span><span class="line"><span class="cl">kubectl config view
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="创建-service" class="headerLink">
+    <a href="#%e5%88%9b%e5%bb%ba-service" class="header-mark"></a>创建 service</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubectl expose deployment hello-node --type<span class="o">=</span>LoadBalancer --port<span class="o">=</span><span class="m">8080</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看 service</span>
+</span></span><span class="line"><span class="cl">kubectl get services
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="kubernetes-中的几个组件和概念" class="headerLink">
+    <a href="#kubernetes-%e4%b8%ad%e7%9a%84%e5%87%a0%e4%b8%aa%e7%bb%84%e4%bb%b6%e5%92%8c%e6%a6%82%e5%bf%b5" class="header-mark"></a>kubernetes 中的几个组件和概念</h2><p>pod: 是由一个或多个为了管理和联网而绑定在一起的容器构成的组
+service：
+deployment：</p>]]></description>
 </item></channel>
 </rss>

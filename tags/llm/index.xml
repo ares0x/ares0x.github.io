@@ -31,6 +31,76 @@
 </span></span><span class="line"><span class="cl">brew install git-lfs
 </span></span><span class="line"><span class="cl"><span class="c1"># 验证安装</span>
 </span></span><span class="line"><span class="cl">git lfs install
-</span></span></code></pr]]></description>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="下载代码" class="headerLink">
+    <a href="#%e4%b8%8b%e8%bd%bd%e4%bb%a3%e7%a0%81" class="header-mark"></a>下载代码</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载代码</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/THUDM/ChatGLM-6B.git
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装依赖</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ChatGLM-6B <span class="o">&amp;&amp;</span> pip3 install -r requirements.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="下载并验证模型" class="headerLink">
+    <a href="#%e4%b8%8b%e8%bd%bd%e5%b9%b6%e9%aa%8c%e8%af%81%e6%a8%a1%e5%9e%8b" class="header-mark"></a>下载并验证模型</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载模型</span>
+</span></span><span class="line"><span class="cl">git clone https://huggingface.co/THUDM/chatglm-6b <span class="c1"># 此过程会耗时一段时间，你可以去接杯水</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入模型所在目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> chatglm-6b
+</span></span><span class="line"><span class="cl"><span class="c1"># 验证模型</span>
+</span></span><span class="line"><span class="cl">shasum -a <span class="m">256</span> ice_text.model
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果输出“5e974d9a69c242ce014c88c2b26089270f6198f3c0b700a887666cd3e816f17e  ice_text.model” 则表示下载正确</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="修改部分代码" class="headerLink">
+    <a href="#%e4%bf%ae%e6%94%b9%e9%83%a8%e5%88%86%e4%bb%a3%e7%a0%81" class="header-mark"></a>修改部分代码</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 修改模型路径，将原始的 THUDM/chatglm-6b 替换为模型所在目录的绝对路径， /Users/ares/workspace/python/projects/ChatGLM-6B/THUDM/chatglm-6b 为我的本地的路径</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 按照官方文档，Apple Silicon的 Mac 可以开启终端加速，即，将 half().cuda() 替换为 half().to(&#39;mps&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&#34;/Users/ares/workspace/python/projects/ChatGLM-6B/THUDM/chatglm-6b&#34;</span><span class="p">,</span> <span class="n">trust_remote_code</span>      <span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&#34;/Users/ares/workspace/python/projects/ChatGLM-6B/THUDM/chatglm-6b&#34;</span><span class="p">,</span> <span class="n">trust_remote_code</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">half</span><span class="p">()</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="启动交互环境" class="headerLink">
+    <a href="#%e5%90%af%e5%8a%a8%e4%ba%a4%e4%ba%92%e7%8e%af%e5%a2%83" class="header-mark"></a>启动交互环境</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">python cli_demo.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="reference" class="headerLink">
+    <a href="#reference" class="header-mark"></a>Reference</h2><ul>
+<li><a href="https://sspai.com/post/79230" target="_blank" rel="noopener noreferrer">用 10 万条微信聊天记录和 280 篇博客文章，我克隆了一个数字版自己</a></li>
+<li><a href="https://github.com/THUDM/ChatGLM-6B/blob/main/README.md" target="_blank" rel="noopener noreferrer">ChatGLM-6B</a></li>
+</ul>]]></description>
 </item></channel>
 </rss>

@@ -11,7 +11,8 @@
   <meta property="og:description" content=" I. 介绍在计算机网络编程中，I/O 多路复用技术是实现高并发网络编程的重要工具。传统的网络编程模型中，一个线程或进程只能处理一个连接，这样当有大量连接时，需要创建和管理大量的线程或进程，从而极大地浪费了系统资源。I/O 多路复用技术可以在不增加线程或进程数量的情况下，同时处理多个连接，从而提高系统并发处理能力，降低系统负载，实现高效的网络编程。
 epoll 是 Linux 操作系统提供的一种 I/O 多路复用机制。相比于传统的 I/O 多路复用机制（如 select 和 poll），epoll 具有高效、可扩展、低延迟等优势。它适用于大量连接的网络编程场景，可以极大地提高网络程序的性能。
 II. epoll 基本概念• 介绍 epoll 的工作原理，如 epoll_ctl、epoll_wait、epoll_event 等 • 解释 epoll_socket 和 eventfd • 对比 select 和 poll 与 epoll
-III. epoll 的使用• 介绍 epoll 在 Linux 中的使用，如连接和事件处理等 • 深入阐述 epoll 的使用方法，如非阻塞和边缘触发等 • 解释 epoll 与线程池的配合使用">
+III. epoll 的使用• 介绍 epoll 在 Linux 中的使用，如连接和事件处理等 • 深入阐述 epoll 的使用方法，如非阻塞和边缘触发等 • 解释 epoll 与线程池的配合使用
+IV. epoll 在 Redis 中的使用• 了解 Redis 的网络模型，特别是它的 I/O 模型 • 着眼于 Redis 中的网络和 I/O 事件驱动模型 • 分析 Redis 网络编程中的 I/O 事件复用方式，包括 epoll 和 select/poll 的比较">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="drafts">
@@ -22,7 +23,8 @@ III. epoll 的使用• 介绍 epoll 在 Linux 中的使用，如连接和事件
   <meta name="twitter:description" content=" I. 介绍在计算机网络编程中，I/O 多路复用技术是实现高并发网络编程的重要工具。传统的网络编程模型中，一个线程或进程只能处理一个连接，这样当有大量连接时，需要创建和管理大量的线程或进程，从而极大地浪费了系统资源。I/O 多路复用技术可以在不增加线程或进程数量的情况下，同时处理多个连接，从而提高系统并发处理能力，降低系统负载，实现高效的网络编程。
 epoll 是 Linux 操作系统提供的一种 I/O 多路复用机制。相比于传统的 I/O 多路复用机制（如 select 和 poll），epoll 具有高效、可扩展、低延迟等优势。它适用于大量连接的网络编程场景，可以极大地提高网络程序的性能。
 II. epoll 基本概念• 介绍 epoll 的工作原理，如 epoll_ctl、epoll_wait、epoll_event 等 • 解释 epoll_socket 和 eventfd • 对比 select 和 poll 与 epoll
-III. epoll 的使用• 介绍 epoll 在 Linux 中的使用，如连接和事件处理等 • 深入阐述 epoll 的使用方法，如非阻塞和边缘触发等 • 解释 epoll 与线程池的配合使用">
+III. epoll 的使用• 介绍 epoll 在 Linux 中的使用，如连接和事件处理等 • 深入阐述 epoll 的使用方法，如非阻塞和边缘触发等 • 解释 epoll 与线程池的配合使用
+IV. epoll 在 Redis 中的使用• 了解 Redis 的网络模型，特别是它的 I/O 模型 • 着眼于 Redis 中的网络和 I/O 事件驱动模型 • 分析 Redis 网络编程中的 I/O 事件复用方式，包括 epoll 和 select/poll 的比较">
       <meta name="twitter:site" content="@ares0x00">
 <meta name="application-name" content="ares0x&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="ares0x&#39;s blog">
@@ -157,7 +159,7 @@ III. epoll 的使用• 介绍 epoll 在 Linux 中的使用，如连接和事件
 </div></div></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.134.1">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.134.2">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">ares0x</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
