@@ -1,1 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Jace's Blog</title><link>https://example.org/page/</link><description>Recent content in Pages on Jace's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://example.org/page/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://example.org/page/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/page/about/</guid><description/></item><item><title>Archives</title><link>https://example.org/page/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/page/archives/</guid><description/></item><item><title>Search</title><link>https://example.org/page/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/page/search/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Jace's Blog</title><link>https://example.org/page/</link><description>Recent content in Pages on Jace's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://example.org/page/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://example.org/page/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/page/about/</guid><description>&lt;h1 id="about">About
+&lt;/h1>&lt;p>你好，我是 Jace，一名技术出身的独立创作者、投资者和终身学习者。&lt;/p>
+&lt;ul>
+&lt;li>👨‍💻 热爱开发与创造，关注技术、产品与工具的结合&lt;/li>
+&lt;li>🏋️‍♂️ 健身爱好者，喜欢研究训练与饮食的科学&lt;/li>
+&lt;li>🍳 烹饪是我的生活调剂，乐在其中&lt;/li>
+&lt;li>🐱 和一只无毛猫一起生活，体验人与动物的默契日常&lt;/li>
+&lt;li>📚 爱读书、做笔记，并尝试用写作与世界对话&lt;/li>
+&lt;li>📈 长期关注美股与数字货币的投资机会&lt;/li>
+&lt;li>🔮 对中国古代的易学文化充满敬意，持续学习八字、紫微斗数与面相之术&lt;/li>
+&lt;/ul>
+&lt;p>这个博客是我记录思考、成长、创作的空间，也希望它能为你带来启发。&lt;/p>
+&lt;p>欢迎你常来看看，或者在某一篇文章中，留下你的想法 🙌&lt;/p></description></item><item><title>Archives</title><link>https://example.org/page/archives/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/page/archives/</guid><description/></item><item><title>Search</title><link>https://example.org/page/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://example.org/page/search/</guid><description/></item></channel></rss>
